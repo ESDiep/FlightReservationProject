@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+actor "Customer" as C
+actor "Airline Staff" as AS
+actor "System Admin" as SA
+
+rectangle FlightReservationSystem {
+	usecase "browse Flight" as brf
+	usecase "browse seat" as brs
+	usecase "book flight" as bof
+	usecase "cancel flight" as cf
+	usecase "browse passengers" as brp
+	usecase "browse crews" as brc
+	usecase "browse aircrafts" as bra
+	usecase "change crew" as cc
+	usecase "change aircraft" as ca
+	usecase "change flight" as cf
+	
+}
+
+C <|-- Registered 
+C <|-- NonRegistered 
+
+C --> brf
+C --> bof
+C --> brs
+C --> cf
+
+SA --> brf
+SA --> brc
+SA --> bra
+SA --> brp
+SA --> ca
+SA --> cc
+SA --> cf
+
+AS --> brp
+
+@enduml
