@@ -1,8 +1,16 @@
 @startuml
 left to right direction
+actor "Registered Customer" as RC
+actor "Non-registered Customer" as NC
 actor "Customer" as C
-actor "Airline Staff" as AS
 actor "System Admin" as SA
+actor "Airline Staff" as AS
+actor "Airline agent" as AA
+actor "Flight attendant" as FA
+actor "Email system" as ES
+actor "Datab base" as DB
+
+usecase "login" 
 
 rectangle FlightReservationSystem {
 	usecase "browse Flight" as brf
@@ -15,25 +23,47 @@ rectangle FlightReservationSystem {
 	usecase "change crew" as cc
 	usecase "change aircraft" as ca
 	usecase "change flight" as cf
-	
+	usecase "pay flight" as pf	
+	usecase "select seat" as ss
+	usecase "modify flight" as mf
+	usecase "print passenger" as pp
+	usecase "select ticket" as st
 }
 
-C <|-- Registered 
-C <|-- NonRegistered 
+C <|-- RC 
+C <|-- NC
+
+FA ..|> AS
+AA ..|> AS
+
+bof ..|> brf: <<include>>
+bof ..|> brs: <<include>>
+bof ..|> pf: <<include>>
+bof ..|> ss: <<include>>
+bof ..|> st
+
+brp ..> brs
+
+login--> AS
+login --> SA
+login --> RC
+
 
 C --> brf
 C --> bof
 C --> brs
 C --> cf
 
-SA --> brf
-SA --> brc
-SA --> bra
+SA --> mf
+SA --> pp
 SA --> brp
-SA --> ca
-SA --> cc
-SA --> cf
+mf ..> ca 
+mf ..> cc
+mf ..> brf
+cc ..> brc
+ca ..> bra
 
 AS --> brp
+
 
 @enduml
