@@ -93,3 +93,4 @@ Desktop.ini
 
 # Ignore temporary files created by other Office applications
 *.tmp
+/bin/
