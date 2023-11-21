@@ -1,0 +1,14 @@
+@startuml
+[*] --> BookingInitiated: Start Booking
+BookingInitiated --> FlightSelection: Browse Flights
+FlightSelection --> SeatSelection: Select Flight
+SeatSelection --> OptionalInsurance: Select Seat
+OptionalInsurance --> Payment: Choose Insurance
+Payment --> PaymentProcessing: Make Payment
+PaymentProcessing --> PaymentSuccessful: Payment Validated
+PaymentProcessing --> PaymentFailed: Payment Failed
+PaymentSuccessful --> TicketIssued: Generate Ticket
+PaymentFailed --> BookingCancelled: Cancel Booking
+TicketIssued --> [*]
+BookingCancelled --> [*]
+@enduml

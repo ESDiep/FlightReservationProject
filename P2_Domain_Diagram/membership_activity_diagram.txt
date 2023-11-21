@@ -1,0 +1,10 @@
+@startuml
+start
+:User accesses registration form;
+:Fill in personal details;
+:Submit registration form;
+:Store user information in database;
+:Send confirmation email;
+:User receives confirmation;
+stop
+@enduml

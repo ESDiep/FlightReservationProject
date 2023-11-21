@@ -1,0 +1,6 @@
+@startuml
+[*] --> SearchInitiated
+SearchInitiated --> CriteriaEntered : Enter Search Criteria
+CriteriaEntered --> FlightsDisplayed : Display Flights
+FlightsDisplayed --> [*]
+@enduml

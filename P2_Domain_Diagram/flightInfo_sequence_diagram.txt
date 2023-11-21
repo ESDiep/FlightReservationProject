@@ -1,0 +1,10 @@
+@startuml
+actor "System Admin" as SA
+participant "Flight Management System" as FMS
+database "Flight Database" as FD
+
+SA -> FMS: Request to add flight information
+FMS -> FD: Update flight info
+FD -> FMS: Confirm update
+FMS -> SA: Notify update success
+@enduml

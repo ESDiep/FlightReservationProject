@@ -1,0 +1,16 @@
+@startuml
+start
+:User selects booking;
+:Enter payment details;
+:Submit payment;
+if (Payment validation?) then (success)
+    :Process payment;
+    :Generate receipt;
+    :Send receipt via email;
+else (failure)
+    :Notify payment failure;
+    stop
+endif
+:End transaction;
+stop
+@enduml
