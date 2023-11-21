@@ -1,0 +1,10 @@
+@startuml
+actor User as U
+participant "Flight Search System" as FSS
+database "Flight Database" as FD
+
+U -> FSS: Request available flights
+FSS -> FD: Query for available flights
+FD -> FSS: Return list of flights
+FSS -> U: Display available flights
+@enduml

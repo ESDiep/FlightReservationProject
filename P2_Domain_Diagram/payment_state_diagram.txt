@@ -1,0 +1,10 @@
+@startuml
+[*] --> PaymentInitiated
+PaymentInitiated --> PaymentDetailsEntered : Enter Payment Details
+PaymentDetailsEntered --> PaymentProcessing : Submit Payment
+PaymentProcessing --> PaymentSuccessful : Validation Success
+PaymentProcessing --> PaymentFailed : Validation Failure
+PaymentSuccessful --> ReceiptGenerated
+PaymentFailed --> [*]
+ReceiptGenerated --> [*]
+@enduml

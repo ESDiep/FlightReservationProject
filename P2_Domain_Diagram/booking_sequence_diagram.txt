@@ -1,0 +1,16 @@
+@startuml
+actor User as U
+participant "Booking System" as BS
+database "Flight Database" as FD
+participant "Payment Service" as PS
+participant "Email Service" as ES
+
+U -> BS: Request to manage booking
+BS -> FD: Query available flights
+FD -> BS: Return flight details
+U -> BS: Select flight and provide payment details
+BS -> PS: Process payment
+PS -> BS: Confirm payment
+BS -> ES: Send tickets and receipt
+ES -> U: Email tickets and receipts
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+[*] --> RegistrationStarted
+RegistrationStarted --> RegistrationFormFilled : Fill Form
+RegistrationFormFilled --> RegistrationSubmitted : Submit Form
+RegistrationSubmitted --> RegistrationConfirmed : Confirm Registration
+RegistrationConfirmed --> [*]
+@enduml

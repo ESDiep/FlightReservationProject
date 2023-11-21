@@ -1,0 +1,10 @@
+@startuml
+start
+:System Admin accesses flight management;
+:Enter new flight details;
+:Validate flight information;
+:Store flight information in database;
+:Confirm addition of flight info;
+:System Admin receives confirmation;
+stop
+@enduml
