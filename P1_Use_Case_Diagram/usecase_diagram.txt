@@ -1,8 +1,8 @@
 @startuml
 left to right direction
 
-actor User
-actor RegisteredUser
+actor RegisteredCustomer
+actor Customer
 actor TourismAgent
 actor AirlineAgent
 actor FlightAttendant
@@ -11,57 +11,60 @@ actor Bank
 
 rectangle Flight_Reservation_System {
 	usecase "Manage Booking" as UC1
-	usecase "Manage Passenger List" as UC2
+	usecase "Manage PassengerList" as UC2
 	usecase "Manage Flights" as UC3
-	usecase "Manage Flight Crew" as UC4
-	usecase "Manage Registered Users" as UC5
+	usecase "Manage FlightCrew" as UC4
+	usecase "Manage RegisteredUsers" as UC5
 	usecase "Manage Aircrafts" as UC6
+	usecase "Login" as UC7
 	
-	usecase "Browse Available Flights" as UC11
-	usecase "Select Desired Flight" as UC12
-	usecase "Browse Seat Map" as UC13
-	usecase "Select Desired Seat" as UC14
-	usecase "Choose Ticket Cancellation Insurance" as UC15
+	usecase "Browse Flights" as UC11
+	usecase "Select Flight" as UC12
+	usecase "Browse Seat" as UC13
+	usecase "Select Seat" as UC14
+	usecase "Choose TicketCancellationInsurance" as UC15
 	usecase "Make Payment" as UC16
-	usecase "Receive Ticket via Email" as UC17
-	usecase "Receive Payment Receipt via Email" as UC18
-	usecase "Cancel Flight Reservation" as UC19
+	usecase "Receive Ticket" as UC17
+	usecase "Receive PaymentReceipt" as UC18
+	usecase "Cancel Reservation" as UC19
 	
-	usecase "Register for Membership" as UC21
-	usecase "Apply for Company's Credit Card" as UC22
-	usecase "Receive Monthly Promotion News" as UC23
-	usecase "Use Airport Lounges with Discount" as UC24
-	usecase "Receive Free Companion Ticket Annually" as UC25
+	usecase "Membership Registration" as UC21
+	usecase "CompanyCreditCard" as UC22
+	usecase "PromotionNews" as UC23
+	usecase "AirportLoungesDiscount" as UC24
+	usecase "FreeCompanionTicket" as UC25
 	
-	usecase "Browse Passenger Lists" as UC26
-	usecase "Browse List of Flights" as UC27
-	usecase "Browse Crew Lists for a Specific Flight" as UC28
-	usecase "Browse Aircraft Lists" as UC29
+	usecase "Browse PassengerLists" as UC26
+	usecase "Browse FlightLists" as UC27
+	usecase "Browse FlightCrewLists" as UC28
+	usecase "Browse AircraftLists" as UC29
 	
-	usecase "Add Flight Destination" as UC31
-	usecase "Remove Flight Destination" as UC32
-	usecase "Add Flight Info" as UC33
-	usecase "Remove Flight Info" as UC34
-	usecase "Modify Flight Info" as UC35
-	usecase "Modify Seat Price" as UC36
+	usecase "Add FlightDestination" as UC31
+	usecase "Remove FlightDestination" as UC32
+	usecase "Add FlightInfo" as UC33
+	usecase "Remove FlightInfo" as UC34
+	usecase "Modify FlightInfo" as UC35
+	usecase "Modify SeatPrice" as UC36
 	
-	usecase "Add Flight Crew" as UC41
-	usecase "Remove Flight Crew" as UC42
+	usecase "Add FlightCrew" as UC41
+	usecase "Remove FlightCrew" as UC42
 	
-	usecase "Add an Aircraft" as UC51
-	usecase "Remove an Aircraft" as UC52
-	usecase "Modify an Aircraft" as UC53
+	usecase "Add Aircraft" as UC51
+	usecase "Remove Aircraft" as UC52
+	usecase "Modify Aircraft" as UC53
 		
-	usecase "Add a User" as UC61
-	usecase "Remove a User" as UC62
-	usecase "Modify a User" as UC63
-	usecase "Manage User Benefits" as UC64
-	usecase "Print List of Registered Users" as UC65
+	usecase "Add User" as UC61
+	usecase "Remove User" as UC62
+	usecase "Modify User" as UC63
+	usecase "Manage UserBenefits" as UC64
+	usecase "Print RegisteredUsersList" as UC65
 	
-	usecase "Validate Card or Payment Details" as UC71
+	usecase "Validate Card/Payment" as UC71
+	usecase "Verify Password" as UC72
+	usecase "Display LoginError" as UC73
 }
 
-User -- UC1
+Customer -- UC1
 TourismAgent -- UC1
 AirlineAgent -- UC1
 
@@ -73,10 +76,17 @@ SystemAdmin -- UC4
 SystemAdmin -- UC5
 SystemAdmin -- UC6
 
+RegisteredCustomer -- UC7
+TourismAgent -- UC7
+AirlineAgent -- UC7
+
+UC7 ..> UC72: <<include>>
+UC7 <.. UC73: <<extend>>
+
 Bank -- UC71
 UC16 ..> UC71: <<include>>
 
-User <|-- RegisteredUser
+Customer <|-- RegisteredCustomer
 UC1 ..> UC11: <<include>>
 UC1 ..> UC12: <<include>>
 UC1 ..> UC13: <<include>>
@@ -87,7 +97,7 @@ UC1 ..> UC17: <<include>>
 UC1 ..> UC18: <<include>>
 UC1 ..> UC19: <<include>>
 
-RegisteredUser -- UC21
+RegisteredCustomer -- UC21
 UC21 <.. UC22: <<extend>>
 UC21 <.. UC23: <<extend>>
 UC21 <.. UC24: <<extend>>

@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+actor RegisteredCustomer
+actor Customer
+actor TourismAgent
+actor AirlineAgent
+actor FlightAttendant
+actor SystemAdmin
+
+rectangle Flight_Reservation_System {
+	usecase "Manage Booking" as UC1
+	usecase "Manage RegisteredCustomer" as UC5
+	usecase "Login" as UC7
+	
+	usecase "Browse Flights" as UC11
+	usecase "Select Flight" as UC12
+	usecase "Browse Seat" as UC13
+	usecase "Select Seat" as UC14
+	usecase "Choose TicketCancellationInsurance" as UC15
+	usecase "Make Payment" as UC16
+	usecase "Receive Ticket" as UC17
+	usecase "Receive PaymentReceipt" as UC18
+	usecase "Cancel BookedFlight" as UC19
+	
+	usecase "Membership Registration" as UC21
+	
+	usecase "Browse PassengerLists" as UC26
+	usecase "Browse FlightLists" as UC27
+	usecase "Browse CrewLists" as UC28
+	usecase "Browse AircraftLists" as UC29
+			
+	usecase "Manage Benefits" as UC64
+	usecase "Print UserList" as UC65
+	
+}
+
+Customer -- UC1
+TourismAgent -- UC1
+AirlineAgent -- UC1
+
+AirlineAgent -- UC26
+FlightAttendant -- UC26
+
+SystemAdmin -- UC27
+SystemAdmin -- UC28
+SystemAdmin -- UC5
+SystemAdmin -- UC7
+SystemAdmin -- UC29
+
+RegisteredCustomer -- UC7
+TourismAgent -- UC7
+AirlineAgent -- UC7
+
+Customer <|-- RegisteredCustomer
+UC1 ..> UC11: <<include>>
+UC1 ..> UC12: <<include>>
+UC1 ..> UC13: <<include>>
+UC1 ..> UC14: <<include>>
+UC1 ..> UC15: <<include>>
+UC1 ..> UC16: <<include>>
+UC1 ..> UC17: <<include>>
+UC1 ..> UC18: <<include>>
+UC1 ..> UC19: <<include>>
+
+RegisteredCustomer -- UC21
+
+UC5 ..> UC64: <<include>>
+UC5 ..> UC65: <<include>>
+
+@enduml
