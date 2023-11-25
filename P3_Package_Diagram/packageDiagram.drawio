@@ -1,0 +1,139 @@
+<mxfile host="app.diagrams.net" modified="2023-11-25T23:28:38.720Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="bGhUWc0MkgY9xFfUQFLm" version="22.1.4" type="google" pages="2">
+  <diagram name="Page-1" id="Dmszp9uCg0UVvJNskLVM">
+    <mxGraphModel dx="1290" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="i59G8g-TgdggVxum29g9-1" value="Flight Reservation Local Server" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="460" y="10" width="230" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="i59G8g-TgdggVxum29g9-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="i59G8g-TgdggVxum29g9-2" target="i59G8g-TgdggVxum29g9-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i59G8g-TgdggVxum29g9-13" value="Local Network" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="i59G8g-TgdggVxum29g9-12" connectable="0" vertex="1">
+          <mxGeometry x="-0.3497" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="i59G8g-TgdggVxum29g9-2" value="Database Server" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="477.5" y="240" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="i59G8g-TgdggVxum29g9-3" value="Client Workstation" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="230" y="50" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="i59G8g-TgdggVxum29g9-4" value="Admin Workstation" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="800" y="40" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="i59G8g-TgdggVxum29g9-7" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;Component&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;+ Booking Service: Type&lt;br&gt;+ Manage Flight Service: Type&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="60" width="135" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="i59G8g-TgdggVxum29g9-8" value="" style="shape=component;jettyWidth=8;jettyHeight=4;" parent="i59G8g-TgdggVxum29g9-7" vertex="1">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-24" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="6ZwokuRNz4v_NI3HsVRm" name="Page-2">
+    <mxGraphModel dx="3717" dy="2304" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.468;entryY=0.055;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="kuPcL34wRaoyvFUCMp9R-6" target="kuPcL34wRaoyvFUCMp9R-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-6" value="User Interface Package" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-9" y="-40" width="350" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.511;entryY=0.053;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="kuPcL34wRaoyvFUCMp9R-2" target="kuPcL34wRaoyvFUCMp9R-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-2" value="Booking Package" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-240" y="370" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-7" value="User Authentication" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-9" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-8" value="User Dashboard" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="111" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-9" value="Flight/Seat Selection" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-240" y="410" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-10" value="Payment Interface" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-9" y="130" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-11" value="Email Notifications" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="111" y="130" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-12" value="UI Components" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="231" y="130" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-13" value="Payment Processing" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-120" y="410" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-14" value="Ticket Cancellation" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="10" y="410" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-15" value="Insurance Handling" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-240" y="502.5" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-16" value="Seat Availability Management" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="502.5" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-17" value="Management Package" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="245" y="371" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-18" value="Flight Management" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="255" y="401" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-19" value="Airport Management" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="265" y="531" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-20" value="User Management" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="395" y="401" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-21" value="Aircraft Management" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="515" y="471" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-22" value="Schedule Management" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="445" y="531" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-23" value="Crew Management" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="515" y="391" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.273;entryY=0.056;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="kuPcL34wRaoyvFUCMp9R-6" target="kuPcL34wRaoyvFUCMp9R-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="250" as="sourcePoint" />
+            <mxPoint x="178" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-28" value="Database Package" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-13" y="800" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.507;entryY=0.042;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.532;exitY=1.01;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="kuPcL34wRaoyvFUCMp9R-17" target="kuPcL34wRaoyvFUCMp9R-28">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-40" y="600" as="sourcePoint" />
+            <mxPoint x="149" y="822" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-31" value="Database Schema" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-13" y="830" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-32" value="Database Queries" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-13" y="900" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-33" value="Database Views" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="80" y="970" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-34" value="Database Triggers" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="255" y="930" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kuPcL34wRaoyvFUCMp9R-35" value="Database Access Layer" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="257" y="830" width="110" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
