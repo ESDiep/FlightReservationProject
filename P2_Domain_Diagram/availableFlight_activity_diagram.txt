@@ -1,6 +1,6 @@
 @startuml
 start
-:User logs into system;
+:User go to the website;
 :Enter search criteria for flights;
 :Query flight database;
 :Display available flights;
