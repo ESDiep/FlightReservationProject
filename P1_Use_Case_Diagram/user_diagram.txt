@@ -1,5 +1,6 @@
 @startuml
 left to right direction
+skinparam packageStyle rectangle
 actor "Registered Customer" as RC
 actor "Non-registered Customer" as NC
 actor "Customer" as C
@@ -8,9 +9,9 @@ actor "Airline Staff" as AS
 actor "Airline agent" as AA
 actor "Flight attendant" as FA
 actor "Email system" as ES
-actor "Datab base" as DB
+actor "Data base" as DB
 
-usecase "login" 
+
 
 rectangle FlightReservationSystem {
 	usecase "browse Flight" as brf
@@ -28,6 +29,9 @@ rectangle FlightReservationSystem {
 	usecase "modify flight" as mf
 	usecase "print passenger" as pp
 	usecase "select ticket" as st
+	usecase "login" 
+	usecase "send notification" as SN
+	usecase "store flight data" as SFD
 }
 
 C <|-- RC 
@@ -44,9 +48,9 @@ bof ..|> st
 
 brp ..> brs
 
-login--> AS
-login --> SA
-login --> RC
+login <-- AS
+login <-- SA
+login <-- RC
 
 
 C --> brf
@@ -64,6 +68,9 @@ cc ..> brc
 ca ..> bra
 
 AS --> brp
+
+ES --> SN
+DB --> SFD
 
 
 @enduml
