@@ -1,6 +1,6 @@
 @startuml
 start
-:User logs in;
+:User logs in (optional);
 :Browse available flights;
 if (Flight found?) then (yes)
     :Select desired flight;
@@ -9,7 +9,8 @@ else (no)
 endif
 :Browse seat map;
 :Select desired seat;
-:Choose ticket cancellation insurance (optional);
+:Choose ticket cancellation insurance;
+:User can log in here or sign up for an account, or skip;
 :Make payment;
 if (Payment successful?) then (yes)
     :Receive ticket via email;
