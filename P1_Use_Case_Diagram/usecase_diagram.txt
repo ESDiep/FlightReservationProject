@@ -18,14 +18,15 @@ rectangle Flight_Reservation_System {
 	usecase "Manage Aircrafts" as UC6
 	
 	usecase "Browse Available Flights" as UC11
-	usecase "Select Desired Flight" as UC12
+	usecase "Select Flight" as UC12
 	usecase "Browse Seat Map" as UC13
-	usecase "Select Desired Seat" as UC14
+	usecase "Select Seat" as UC14
 	usecase "Choose Ticket Cancellation Insurance" as UC15
 	usecase "Make Payment" as UC16
 	usecase "Receive Ticket via Email" as UC17
 	usecase "Receive Payment Receipt via Email" as UC18
 	usecase "Cancel Flight Reservation" as UC19
+	usecase "Change Flight" as CF
 	
 	usecase "Register for Membership" as UC21
 	usecase "Apply for Company's Credit Card" as UC22
@@ -59,6 +60,7 @@ rectangle Flight_Reservation_System {
 	usecase "Print List of Registered Users" as UC65
 	
 	usecase "Validate Card or Payment Details" as UC71
+	usecase "log-in" as log
 }
 
 User -- UC1
@@ -73,6 +75,12 @@ SystemAdmin -- UC4
 SystemAdmin -- UC5
 SystemAdmin -- UC6
 
+RegisteredUser -- log
+TourismAgent -- log
+AirlineAgent --log
+FlightAttendant -- log
+SystemAdmin -- log
+
 Bank -- UC71
 UC16 ..> UC71: <<include>>
 
@@ -86,6 +94,7 @@ UC1 ..> UC16: <<include>>
 UC1 ..> UC17: <<include>>
 UC1 ..> UC18: <<include>>
 UC1 ..> UC19: <<include>>
+UC1 ..> CF: <<include>>
 
 RegisteredUser -- UC21
 UC21 <.. UC22: <<extend>>
