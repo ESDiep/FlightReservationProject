@@ -33,6 +33,9 @@ public class Airline {
 		flights.remove(f);
 	}
 	
+	public void addAircraft(Aircraft aircraft) {
+		aircrafts.add(aircraft);
+	}
 	public Flight getFlight(Date date, String destination, String origin) {
 		
 	}
