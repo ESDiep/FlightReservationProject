@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
         button_goback.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeSceneToSearch(event,"search-flight.fxml","Welcome!");
+                DBUtils.changeSceneBasic(event,"search-flight.fxml","Welcome!");
             }
         });
     }

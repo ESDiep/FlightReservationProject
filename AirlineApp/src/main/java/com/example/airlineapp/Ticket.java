@@ -56,6 +56,21 @@ public class Ticket {
                 ", \naircraft='" + aircraft + '\'';
     }
 
+    public String toStringForCancel() {
+        return "Ticket Information: \n" +
+                "\nPassenger First Name='" + cust_firstname + '\'' +
+                "\nLast Name='" + cust_lastname + '\'' +
+                "\nflightID='" + flightID + '\'' +
+                ", \nseatID='" + seatID + '\'' +
+                ", \nprice= $" + price +
+                ", \ndepart_time='" + depart_time + '\'' +
+                ", \narrival_time='" + arrival_time + '\'' +
+                ", \noriginOutput='" + originOutput + '\'' +
+                ", \ndestinationOutput='" + destinationOutput + '\'' +
+                ", \nflightdate='" + flightdate + '\'' +
+                ", \nEmail='" + email + '\'';
+    }
+
     private String aircraft;
 
     public String getCust_lastname() {

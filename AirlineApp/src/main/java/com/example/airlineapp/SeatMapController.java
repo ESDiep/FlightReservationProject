@@ -47,7 +47,7 @@ public class SeatMapController implements Initializable {
 	button_cancel.setOnAction(new EventHandler<ActionEvent>() {
 	    @Override
 	    public void handle(ActionEvent event) {
-		DBUtils.changeSceneToSearch(event,"search-flight.fxml","Welcome!");
+		DBUtils.changeSceneBasic(event,"search-flight.fxml","Welcome!");
 	    }
 	});
 

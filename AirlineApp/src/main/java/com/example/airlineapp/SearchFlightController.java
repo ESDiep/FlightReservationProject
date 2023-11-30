@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class SearchFlightController implements Initializable {
@@ -27,14 +28,33 @@ public class SearchFlightController implements Initializable {
 
     @FXML
     private Button button_login;
+    @FXML
+    private DatePicker datepicker;
+    @FXML
+    private Button button_cancel;
+
+    private LocalDate dateObject;
+
+    public void getDate(ActionEvent event){
+         dateObject=datepicker.getValue();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         button_search.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 ticket=new Ticket();
-                DBUtils.searchFlight(event,listview_box,label_select,tf_origin.getText(),tf_destination.getText(),ticket);
+                if(dateObject==null){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Insufficient Info!\nPlease enter all required Info!");
+                    alert.show();
+                }else {
+                    ticket.setFlightdate(dateObject.toString());
+                    listview_box.getItems().clear();
+                    DBUtils.searchFlight(event,listview_box,label_select,tf_origin.getText(),tf_destination.getText(),ticket);
+                }
             }
         });
 
@@ -58,6 +78,13 @@ public class SearchFlightController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event,"login-view.fxml","Welcome to Login Page!",null,null);
+            }
+        });
+
+        button_cancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeSceneBasic(event,"cancel-view.fxml","Booked the wrong ticket?");
             }
         });
 //        Connection connection = null;
