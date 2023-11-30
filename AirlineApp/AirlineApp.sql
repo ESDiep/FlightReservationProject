@@ -63,10 +63,30 @@ CREATE TABLE `AirlineApp`.`tickets` (
   `securitycode` INT NOT NULL,
   PRIMARY KEY (`paymentID`));
   
-  ALTER TABLE tickets
+ALTER TABLE tickets
 ADD COLUMN aircraft VARCHAR(45),
 ADD COLUMN email VARCHAR(45);
 
+INSERT INTO tickets (ticketID, depart_time, arrival_time,origin,destination,flightdate,aircraft)
+VALUES
+('FL001',	'11:35',	'14:34','calgary','toronto','2023-12-25','boeing 747'),
+('FL002',	'12:35',	'15:34','calgary','toronto','2023-12-25','airbus a321'),
+('FL003',	'13:35',	'16:34','calgary','toronto','2023-12-25','boeing 747'),
+('FL004',	'14:35',	'17:34','calgary','vancouver','2023-12-25','boeing a321'),
+
+('FL005',	'11:35',	'14:34','calgary','vancouver','2023-12-26','boeing 747'),
+('FL006',	'12:35',	'15:34','calgary','vancouver','2023-12-26','airbus a321'),
+
+('FL007',	'13:35',	'16:34','calgary','toronto','2023-12-27','boeing 747'),
+('FL008',	'14:35',	'17:34','calgary','toronto','2023-12-27','boeing a321'),
+
+('FL009',	'14:35',	'17:34','calgary','vancouver','2023-12-28','boeing a321'),
+('FL010',	'11:35',	'14:34','calgary','vancouver','2023-12-28','boeing 747'),
+('FL011',	'12:35',	'15:34','calgary','vancouver','2023-12-28','airbus a321'),
+
+('FL012',	'14:35',	'17:34','calgary','vancouver','2023-12-29','boeing a321'),
+('FL013',	'11:35',	'14:34','calgary','vancouver','2023-12-29','boeing 747'),
+('FL014',	'12:35',	'15:34','calgary','vancouver','2023-12-29','airbus a321');
 
 #select * from users;
 select * from flights;
