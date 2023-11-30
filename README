@@ -1,0 +1,3 @@
+# Flight Management Service
+
+Run the project with `docker compose up -d`

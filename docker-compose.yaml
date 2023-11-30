@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+    db:
+        image: mysql:8
+        environment:
+            MYSQL_DATABASE: flightdb
+            MYSQL_USER: flight-admin
+            MYSQL_PASSWORD: R@nd0m
+            MYSQL_ROOT_PASSWORD: R@nd0mR00t
+        ports:
+            - 3306:3306
+        volumes:
+            - db-data:/var/lib/mysql
+
+    backend:
+        build: ./flight-service
+        ports:
+            - 8080:8080
+        depends_on:
+            - db
+
+volumes:
+    db-data:
