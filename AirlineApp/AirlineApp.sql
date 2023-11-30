@@ -67,26 +67,15 @@ ALTER TABLE tickets
 ADD COLUMN aircraft VARCHAR(45),
 ADD COLUMN email VARCHAR(45);
 
-INSERT INTO tickets (ticketID, depart_time, arrival_time,origin,destination,flightdate,aircraft)
+INSERT INTO tickets (ticketID, paymentID, flightID, cust_lastname, cust_firstname, 
+seatID, price, depart_time, arrival_time, originOutput, destinationOutput, flightdate, aircraft, email)
 VALUES
-('FL001',	'11:35',	'14:34','calgary','toronto','2023-12-25','boeing 747'),
-('FL002',	'12:35',	'15:34','calgary','toronto','2023-12-25','airbus a321'),
-('FL003',	'13:35',	'16:34','calgary','toronto','2023-12-25','boeing 747'),
-('FL004',	'14:35',	'17:34','calgary','vancouver','2023-12-25','boeing a321'),
+('001', '001', 'FL001', 'Smith', 'Tom', '16F', '2000.35', '11:35', '14:34','calgary','toronto','2023-12-25','boeing 747', 'smith@mail.com'),
+('002', '002', 'FL001', 'Brown', 'Angie', '20F', '1500.15',	'12:35', '15:34', 'calgary','toronto','2023-12-25','airbus a321', 'angie@mail.com'),
+('003', '003', 'FL002', 'Black', 'Andy', '16F', '2000.35', '13:35',	'16:34','calgary','toronto','2023-12-26','boeing 747', 'andy@mail.com'),
+('004', '004', 'FL003', 'Smith', 'Grege', '15F', '2000.15',	'14:35',	'17:34','calgary','vancouver','2023-12-28','boeing a321', 'gelm@mail.com'),
+('005', '005', 'FL006', 'Chan', 'Valerie', '14F', '2000.15',	'11:35',	'14:34','calgary','vancouver','2023-12-26','boeing 747', 'valerie@mail.com');
 
-('FL005',	'11:35',	'14:34','calgary','vancouver','2023-12-26','boeing 747'),
-('FL006',	'12:35',	'15:34','calgary','vancouver','2023-12-26','airbus a321'),
-
-('FL007',	'13:35',	'16:34','calgary','toronto','2023-12-27','boeing 747'),
-('FL008',	'14:35',	'17:34','calgary','toronto','2023-12-27','boeing a321'),
-
-('FL009',	'14:35',	'17:34','calgary','vancouver','2023-12-28','boeing a321'),
-('FL010',	'11:35',	'14:34','calgary','vancouver','2023-12-28','boeing 747'),
-('FL011',	'12:35',	'15:34','calgary','vancouver','2023-12-28','airbus a321'),
-
-('FL012',	'14:35',	'17:34','calgary','vancouver','2023-12-29','boeing a321'),
-('FL013',	'11:35',	'14:34','calgary','vancouver','2023-12-29','boeing 747'),
-('FL014',	'12:35',	'15:34','calgary','vancouver','2023-12-29','airbus a321');
 
 #select * from users;
 select * from flights;
