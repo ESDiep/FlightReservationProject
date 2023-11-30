@@ -48,3 +48,7 @@ CREATE TABLE `AirlineApp`.`tickets` (
   `cardnumber` INT NOT NULL,
   `securitycode` INT NOT NULL,
   PRIMARY KEY (`paymentID`));
+  
+  ALTER TABLE tickets
+ADD COLUMN aircraft VARCHAR(45),
+ADD COLUMN email VARCHAR(45);
