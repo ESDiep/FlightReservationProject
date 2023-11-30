@@ -8,6 +8,8 @@ actor AirlineAgent
 actor FlightAttendant
 actor SystemAdmin
 actor Bank
+actor "Email system" as ES
+actor "Data base" as DB
 
 rectangle Flight_Reservation_System {
 	usecase "Manage Booking" as UC1
@@ -61,6 +63,9 @@ rectangle Flight_Reservation_System {
 	
 	usecase "Validate Card or Payment Details" as UC71
 	usecase "log-in" as log
+	
+	usecase "send notification" as SN
+	usecase "store flight data" as SFD
 }
 
 User -- UC1
@@ -126,5 +131,8 @@ UC5 ..> UC62: <<include>>
 UC5 ..> UC63: <<include>>
 UC5 ..> UC64: <<include>>
 UC5 ..> UC65: <<include>>
+
+ES --> SN
+DB --> SFD
 
 @enduml
