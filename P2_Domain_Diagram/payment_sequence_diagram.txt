@@ -1,0 +1,12 @@
+@startuml
+actor User as U
+participant "Payment System" as PS
+participant "Bank System" as BS
+participant "Booking System" as BKS
+
+U -> PS: Initiate payment
+PS -> BS: Request payment processing
+BS -> PS: Process payment and send confirmation
+PS -> BKS: Notify successful payment
+BKS -> U: Confirm booking and payment
+@enduml

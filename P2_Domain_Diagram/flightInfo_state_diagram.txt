@@ -1,0 +1,7 @@
+@startuml
+[*] --> AddFlightInfoInitiated
+AddFlightInfoInitiated --> FlightDetailsEntered : Enter Details
+FlightDetailsEntered --> FlightInfoValidated : Validate Info
+FlightInfoValidated --> FlightInfoStored : Store in Database
+FlightInfoStored --> [*]
+@enduml

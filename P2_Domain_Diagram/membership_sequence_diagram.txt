@@ -1,0 +1,12 @@
+@startuml
+actor User as U
+participant "Registration System" as RS
+database "User Database" as UD
+participant "Email Service" as ES
+
+U -> RS: Request membership registration
+RS -> UD: Store user information
+UD -> RS: Confirm registration
+RS -> ES: Send confirmation email
+ES -> U: Email confirmation
+@enduml

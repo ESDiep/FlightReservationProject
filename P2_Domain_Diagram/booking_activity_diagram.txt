@@ -1,0 +1,23 @@
+@startuml
+start
+:User logs in (optional);
+:Browse available flights;
+if (Flight found?) then (yes)
+    :Select desired flight;
+else (no)
+    stop
+endif
+:Browse seat map;
+:Select desired seat;
+:Choose ticket cancellation insurance;
+:User can log in here or sign up for an account, or skip;
+:Make payment;
+if (Payment successful?) then (yes)
+    :Receive ticket via email;
+    :Receive payment receipt via email;
+else (no)
+    stop
+endif
+:User logs out or continues browsing;
+stop
+@enduml

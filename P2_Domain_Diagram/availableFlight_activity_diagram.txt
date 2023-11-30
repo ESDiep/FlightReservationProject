@@ -1,0 +1,9 @@
+@startuml
+start
+:User go to the website;
+:Enter search criteria for flights;
+:Query flight database;
+:Display available flights;
+:User reviews flight options;
+stop
+@enduml

@@ -1,0 +1,94 @@
+@startuml
+
+class Flight {
+   +FlightID
+   +DepartureTime
+   +ArrivalTime
+   +Origin
+   +Destination
+   +UpdateFlightInfo()
+}
+
+class Booking {
+   +BookingID
+   +FlightID
+   +UserID
+   +SeatNumber
+   +Status
+   +CreateBooking()
+   +CancelBooking()
+}
+
+class User {
+   +UserID
+   +Name
+   +Email
+   +Register()
+   +Login()
+}
+
+class RegisteredUser {
+   +MembershipNumber
+   +AccessMemberBenefits()
+}
+
+class Seat {
+   +SeatID
+   +SeatType
+   +Availability
+   +CheckAvailability()
+}
+
+class Payment {
+   +PaymentID
+   +BookingID
+   +Amount
+   +ProcessPayment()
+}
+
+class FlightCrew {
+   +CrewID
+   +Name
+   +Role
+   +AssignToFlight()
+}
+
+class Aircraft {
+   +AircraftID
+   +Model
+   +Capacity
+   +UpdateAircraftInfo()
+}
+
+class PassengerList {
+   +FlightID
+   +List<Passenger>
+   +GenerateList()
+}
+
+class Passenger {
+   +PassengerID
+   +Name
+   +BookingID
+}
+
+class SystemAdmin {
+   +AdminID
+   +Name
+   +ManageSystem()
+}
+
+User <|-- RegisteredUser
+Booking -- User
+Booking -- Flight
+Booking -- Seat
+Booking "1" -- "1" Payment
+Flight "1" -- "*" FlightCrew
+Flight -- Aircraft
+Flight "1" -- "1" PassengerList
+SystemAdmin -- Flight
+SystemAdmin -- Booking
+SystemAdmin -- Aircraft
+SystemAdmin -- FlightCrew
+
+@enduml
