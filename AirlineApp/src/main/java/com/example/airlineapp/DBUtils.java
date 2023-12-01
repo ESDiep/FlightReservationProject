@@ -402,9 +402,9 @@ public class DBUtils {
 	try {
 //	    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AirlineApp", "root", "12345678");
 	    connection = connectionObject.getDBConnection();
-	    preparedStatement = connection.prepareStatement("SELECT origin, destination,flightdate FROM flights WHERE origin =? AND destination=? AND flightdate=?");
-	    preparedStatement.setString(1, origin);
-	    preparedStatement.setString(2, destination);
+	    preparedStatement = connection.prepareStatement("SELECT origin, destination,flightdate FROM flights WHERE LOWER(origin) =LOWER(?) AND LOWER(destination)=Lower(?)AND flightDate=?");
+	    preparedStatement.setString(1, origin.toLowerCase());
+	    preparedStatement.setString(2, destination.toLowerCase());
 	    preparedStatement.setString(3, ticket.getFlightdate());
 	    resultSet = preparedStatement.executeQuery();
 
@@ -415,9 +415,9 @@ public class DBUtils {
 		alert.show();
 	    } else {
 
-		preparedStatement = connection.prepareStatement("SELECT flightID, depart_time, arrival_time, origin,destination,flightdate,aircraft FROM flights WHERE origin =? AND destination=? AND flightDate=?");
-		preparedStatement.setString(1, origin);
-		preparedStatement.setString(2, destination);
+		preparedStatement = connection.prepareStatement("SELECT flightID, depart_time, arrival_time, origin,destination,flightdate,aircraft FROM flights WHERE LOWER(origin) =LOWER(?) AND Lower(destination)=LOWER(?) AND flightDate=?");
+		preparedStatement.setString(1, origin.toLowerCase().toLowerCase());
+		preparedStatement.setString(2, destination.toLowerCase().toLowerCase());
 		preparedStatement.setString(3, ticket.getFlightdate());
 		resultSet = preparedStatement.executeQuery();
 

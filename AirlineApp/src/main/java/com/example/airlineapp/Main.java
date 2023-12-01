@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main extends Application {
     @Override
@@ -24,9 +25,16 @@ public class Main extends Application {
 	stage.setScene(new Scene(root));
 	stage.show();
 	stage.toFront();
+
     }
 
-    public static void main(String[] args) {
-	launch();
+    public static void main(String[] args) throws SQLException {
+		FillDatabase db=new FillDatabase();
+//		db.createDB();
+//		db.fillDatabase();
+		String currentWorkingDir = System.getProperty("user.dir");
+		System.out.println("Current working directory: " + currentWorkingDir);
+
+		launch();
     }
 }
