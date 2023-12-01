@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public class Main extends Application {
     @Override
@@ -28,12 +30,11 @@ public class Main extends Application {
 
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ParseException {
 		FillDatabase db=new FillDatabase();
-//		db.createDB();
-//		db.fillDatabase();
-		String currentWorkingDir = System.getProperty("user.dir");
-		System.out.println("Current working directory: " + currentWorkingDir);
+		db.createDB();
+		db.fillDatabase();
+
 
 		launch();
     }
