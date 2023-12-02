@@ -19,17 +19,19 @@ import java.util.Optional;
 import java.util.Random;
 
 public class DBUtils {
-    //    private static String var;
+
+
     //helper class, can not be instantiated. contains just static methods
-    public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String favChannel) {
+    public static void changeScene(ActionEvent event, String fxmlFile, String title, User userObject) {
 	Parent root = null;
-	if (username != null && favChannel != null) {
+	if (userObject!= null ) {
 	    try {
 		FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
 		root = loader.load();
-		LoggedInController loggedInController = loader.getController();
-		loggedInController.setUserInformation(username, favChannel);
-	    } catch (IOException e) {
+		InterfaceCustomerController interfaceCustomerController = loader.getController();
+		userObject=DBUtils.getUserObject(userObject.getUsername());
+		interfaceCustomerController.setUserInformation(userObject);
+	    } catch (IOException | SQLException e) {
 		e.printStackTrace();
 	    }
 	} else {
@@ -41,7 +43,7 @@ public class DBUtils {
 	}
 	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 	stage.setTitle(title);
-	stage.setScene(new Scene(root, 600, 400));
+	stage.setScene(new Scene(root));
 	stage.show();
     }
 
@@ -89,6 +91,7 @@ public class DBUtils {
 		    ticket.setOriginOutput(resultSet.getString("origin"));
 		    ticket.setDestinationOutput(resultSet.getString("destination"));
 		    ticket.setFlightdate(resultSet.getString("flightdate"));
+		    Booking.setDiscountApplied(false);
 
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -161,7 +164,7 @@ public class DBUtils {
 	    psInsertPayment.setInt(4, Integer.parseInt(cardcode));
 	    psInsertPayment.executeUpdate();
 
-
+	    Booking.setDiscountApplied(false);
 	    //code below was outside
 	    System.out.println("Payment is Confirmed with unique paymentID:" + ticket.getPaymentID() + "\nTicket is booked with unique TicketID:" + ticket.getTicketID() + "\nConfirmation Email is sent to:" + ticket.getEmail());
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -271,7 +274,7 @@ public class DBUtils {
 
     }
 
-    public static void signUpUser(ActionEvent event, String username, String password, String favChannel) {
+    public static void signUpUser(ActionEvent event, User userObject) {
 	Connection connection = null;
 	PreparedStatement psInsert = null;
 	PreparedStatement psCheckUserExists = null;
@@ -279,25 +282,33 @@ public class DBUtils {
 	DatabaseConnection connectionObject = new DatabaseConnection();
 
 	try {
-//	    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AirlineApp", "root", "12345678");
 	    connection = connectionObject.getDBConnection();
 	    psCheckUserExists = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
-	    psCheckUserExists.setString(1, username);
+	    psCheckUserExists.setString(1, userObject.getUsername());
 	    resultSet = psCheckUserExists.executeQuery();
 
 	    if (resultSet.isBeforeFirst()) {
-		System.out.println("User already exists!");
 		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setContentText("You cannot use this username.");
+		alert.setContentText("Username already exists!\nYou cannot use this username.");
 		alert.show();
 	    } else {
-		psInsert = connection.prepareStatement("INSERT INTO users (username,password,favChannel) VALUES(?,?,?)");
-		psInsert.setString(1, username);
-		psInsert.setString(2, password);
-		psInsert.setString(3, favChannel);
+		psInsert = connection.prepareStatement("INSERT INTO users (username,password,usertype,email,lastname,firstname) VALUES(?,?,?,?,?,?)");
+		psInsert.setString(1, userObject.getUsername());
+		psInsert.setString(2, userObject.getPassword());
+		psInsert.setString(3, userObject.getUsertype());
+		psInsert.setString(4, userObject.getEmail());
+		psInsert.setString(5, userObject.getLastname());
+		psInsert.setString(6, userObject.getFirstname());
 		psInsert.executeUpdate();
+		System.out.println(userObject.toString());
 
-		changeScene(event, "logged-in.fxml", "Welcome!", username, favChannel);
+		if(userObject.getUsertype().equals("customer")){
+		    changeScene(event, "interface-cust.fxml", "Welcome!", userObject);
+		} else if (userObject.getUsertype().equals("agent")) {
+		    changeScene(event, "interface-cust.fxml", "Welcome!", userObject);
+		}else {
+		    System.out.println("bummer");
+		}
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -341,9 +352,8 @@ public class DBUtils {
 	DatabaseConnection connectionObject = new DatabaseConnection();
 
 	try {
-//	    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AirlineApp", "root", "12345678");
 	    connection = connectionObject.getDBConnection();
-	    preparedStatement = connection.prepareStatement("SELECT password, favChannel FROM users WHERE username =?");
+	    preparedStatement = connection.prepareStatement("SELECT password FROM users WHERE username =?");
 	    preparedStatement.setString(1, username);
 	    resultSet = preparedStatement.executeQuery();
 
@@ -355,9 +365,11 @@ public class DBUtils {
 	    } else {
 		while (resultSet.next()) {
 		    String retrievedPassword = resultSet.getString("password");
-		    String retrievedChannel = resultSet.getString("favChannel");
 		    if (retrievedPassword.equals(password)) {
-			changeScene(event, "logged-in.fxml", "Welcome! coming in from login page", username, retrievedChannel);
+			User userObject=new User();
+			userObject.setUsername(username);
+			userObject.setPassword(password);
+			changeScene(event, "interface-cust.fxml", "Welcome! ", userObject);
 		    } else {
 			System.out.println("password did not match");
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -402,9 +414,9 @@ public class DBUtils {
 	try {
 //	    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AirlineApp", "root", "12345678");
 	    connection = connectionObject.getDBConnection();
-	    preparedStatement = connection.prepareStatement("SELECT origin, destination,flightdate FROM flights WHERE LOWER(origin) =LOWER(?) AND LOWER(destination)=Lower(?)AND flightDate=?");
-	    preparedStatement.setString(1, origin.toLowerCase());
-	    preparedStatement.setString(2, destination.toLowerCase());
+	    preparedStatement = connection.prepareStatement("SELECT origin, destination,flightdate FROM flights WHERE origin =? AND destination=? AND flightdate=?");
+	    preparedStatement.setString(1, origin);
+	    preparedStatement.setString(2, destination);
 	    preparedStatement.setString(3, ticket.getFlightdate());
 	    resultSet = preparedStatement.executeQuery();
 
@@ -415,9 +427,9 @@ public class DBUtils {
 		alert.show();
 	    } else {
 
-		preparedStatement = connection.prepareStatement("SELECT flightID, depart_time, arrival_time, origin,destination,flightdate,aircraft FROM flights WHERE LOWER(origin) =LOWER(?) AND Lower(destination)=LOWER(?) AND flightDate=?");
-		preparedStatement.setString(1, origin.toLowerCase().toLowerCase());
-		preparedStatement.setString(2, destination.toLowerCase().toLowerCase());
+		preparedStatement = connection.prepareStatement("SELECT flightID, depart_time, arrival_time, origin,destination,flightdate,aircraft FROM flights WHERE origin =? AND destination=? AND flightDate=?");
+		preparedStatement.setString(1, origin);
+		preparedStatement.setString(2, destination);
 		preparedStatement.setString(3, ticket.getFlightdate());
 		resultSet = preparedStatement.executeQuery();
 
@@ -522,6 +534,33 @@ public class DBUtils {
 	    return tempTicketObject;
 
     }
+    public static User getUserObject(String username) throws SQLException {
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+
+	User tempUserObject=new User();
+	tempUserObject.setUsername(username);
+
+	connection = connectionObject.getDBConnection();
+	preparedStatement = connection.prepareStatement("SELECT usertype, email,lastname,firstname,discountcode FROM users WHERE username =?");
+	preparedStatement.setString(1, username);
+	resultSet = preparedStatement.executeQuery();
+
+	resultSet.next();
+	String usertype=resultSet.getString("usertype");
+	String email=resultSet.getString("email");
+	String lastname=resultSet.getString("lastname");
+	String firstname=resultSet.getString("firstname");
+	String discountcode=resultSet.getString("discountcode");
+	tempUserObject.setUsertype(usertype);
+	tempUserObject.setEmail(email);
+	tempUserObject.setLastname(lastname);
+	tempUserObject.setFirstname(firstname);
+	tempUserObject.setDiscountcode(discountcode);
+	return tempUserObject;
+    }
 
     public static void cancelFlight(ActionEvent event, String fxmlFile, String ticketID, String paymentID) {
 	Parent root = null;
@@ -615,6 +654,144 @@ public class DBUtils {
 	}
 
 
+    }
+
+    public static void displayTickets( ListView<String> listview_box, User user,Ticket outsideTicketObject) {
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+
+	try {
+	    connection = connectionObject.getDBConnection();
+	    preparedStatement = connection.prepareStatement("SELECT ticketID FROM tickets WHERE email =? ");
+	    preparedStatement.setString(1, user.getEmail());
+	    resultSet = preparedStatement.executeQuery();
+
+		while (resultSet.next()) {
+		    String ticketID = resultSet.getString("ticketID");
+		    Ticket ticket=DBUtils.getTicketObject(ticketID);
+		    String listOut = ticket.getTicketID() + "    " +ticket.getFlightID() + "    " + ticket.getOriginOutput() + "    " + ticket.getDestinationOutput() + "    " + ticket.getFlightdate() + "    " + ticket.getDepart_time()+ "    " + ticket.getArrival_time();
+		    listview_box.getItems().add(listOut);//populate listview with values
+		}
+
+		//select item from the list
+	    if(listview_box!=null){
+		listview_box.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+			//everytime an item is selected, this function changed will be called.
+			if (t1 != null) {//this if{} is added to handle clear the listview_box after each time search is pressed.
+			    String var = listview_box.getSelectionModel().getSelectedItem().substring(0, 7).trim();
+			    try {
+				Ticket temp=DBUtils.getTicketObject(var);
+				outsideTicketObject.setTicketID(temp.getTicketID());
+				outsideTicketObject.setCust_firstname(temp.getCust_firstname());
+				outsideTicketObject.setCust_lastname(temp.getCust_lastname());
+				outsideTicketObject.setPaymentID(temp.getPaymentID());
+				outsideTicketObject.setFlightID(temp.getFlightID());
+				outsideTicketObject.setSeatID(temp.getSeatID());
+				outsideTicketObject.setPrice(temp.getPrice());
+				outsideTicketObject.setEmail(temp.getEmail());
+				outsideTicketObject.setAircraft(temp.getAircraft());
+
+			    } catch (SQLException e) {
+				throw new RuntimeException(e);
+			    }
+
+			}
+		    }
+		});
+	    }
+
+
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+
+	    if (resultSet != null) {
+		try {
+		    resultSet.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (connection != null) {
+		try {
+		    connection.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (preparedStatement != null) {
+		try {
+		    preparedStatement.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    public static void checkDiscount(ActionEvent event, Ticket ticket, TextField email, TextField tf_discountcode) {
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+
+	try {
+	    connection = connectionObject.getDBConnection();
+	    preparedStatement = connection.prepareStatement("SELECT discountcode FROM users WHERE email =? ");
+	    preparedStatement.setString(1, email.getText());
+	    resultSet = preparedStatement.executeQuery();
+
+	    if(resultSet.next()){
+		String discountcode=resultSet.getString("discountcode");
+		if(discountcode.equals(tf_discountcode.getText())){
+		    ticket.setPrice(ticket.getPrice()*0.8);
+		    Booking.setDiscountApplied(true);
+
+		    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setHeaderText("Discount Applied!"); // Optional
+		    alert.setContentText("Congratulations!\nYou get a 20% discount");
+		    alert.show();
+		}else {
+		    Alert alert = new Alert(Alert.AlertType.ERROR);
+		    alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
+		    alert.show();
+		}
+	    }else {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
+		alert.show();
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+
+	    if (resultSet != null) {
+		try {
+		    resultSet.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (connection != null) {
+		try {
+		    connection.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (preparedStatement != null) {
+		try {
+		    preparedStatement.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 }
 

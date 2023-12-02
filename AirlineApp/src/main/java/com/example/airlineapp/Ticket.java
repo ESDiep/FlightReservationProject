@@ -50,8 +50,8 @@ public class Ticket {
                 ", \nprice= $" + price +
                 ", \ndepart_time='" + depart_time + '\'' +
                 ", \narrival_time='" + arrival_time + '\'' +
-                ", \noriginOutput='" + originOutput + '\'' +
-                ", \ndestinationOutput='" + destinationOutput + '\'' +
+                ", \norigin='" + originOutput + '\'' +
+                ", \ndestination='" + destinationOutput + '\'' +
                 ", \nflightdate='" + flightdate + '\'' +
                 ", \naircraft='" + aircraft + '\'';
     }
@@ -65,9 +65,21 @@ public class Ticket {
                 ", \nprice= $" + price +
                 ", \ndepart_time='" + depart_time + '\'' +
                 ", \narrival_time='" + arrival_time + '\'' +
-                ", \noriginOutput='" + originOutput + '\'' +
-                ", \ndestinationOutput='" + destinationOutput + '\'' +
+                ", \norigin='" + originOutput + '\'' +
+                ", \ndestination='" + destinationOutput + '\'' +
                 ", \nflightdate='" + flightdate + '\'' +
+                ", \nEmail='" + email + '\'';
+    }
+
+    public String toStringForDisplay() {
+        return  "\nPassenger First Name='" + cust_firstname + '\'' +
+                "\nLast Name='" + cust_lastname + '\'' +
+                "\nTicketID='" + ticketID + '\'' +
+                "\nPaymentID='" + paymentID + '\'' +
+                "\nflightID='" + flightID + '\'' +
+                ", \nseatID='" + seatID + '\'' +
+                ", \nprice= $" + price +
+                ", \nAircraft= " + aircraft +
                 ", \nEmail='" + email + '\'';
     }
 

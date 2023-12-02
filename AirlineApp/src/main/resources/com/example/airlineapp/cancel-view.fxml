@@ -18,7 +18,7 @@
                   <Image url="@../wine.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="button_goback" layoutX="69.0" layoutY="345.0" mnemonicParsing="false" text="Go Back" />
+            <Button fx:id="button_goback" layoutX="70.0" layoutY="338.0" mnemonicParsing="false" text="Go Back" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="400.0" prefWidth="404.0">

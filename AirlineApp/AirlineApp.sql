@@ -1,40 +1,39 @@
 use airlineapp;
+select * from users;
+select * from flights;
+select * from tickets;
+select * from payments;
 
-
+DROP TABLE IF EXISTS users;
+CREATE TABLE `AirlineApp`.`users` (
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `usertype` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `lastname` VARCHAR(45) NOT NULL,
+  `firstname` VARCHAR(45) NOT NULL,
+  `discountcode` VARCHAR(45) NULL,
+  PRIMARY KEY (`username`));
+  
+  UPDATE `airlineapp`.`users` SET `discountcode` = '9999' WHERE (`username` = 'jj');
+  
 DROP TABLE IF EXISTS flights;
 CREATE TABLE flights (
 	flightID			varchar(45) not null,
 	depart_time			varchar(45) not null,
 	arrival_time		varchar(45) not null,
-    origin				varchar(45) not null,
-    destination			varchar(45) not null,
-    flightdate			varchar(45) not null,
-    aircraft			varchar(45) not null,
-   # capacity 			int,
-   # seatBooked			int,
-   # seatEmpty			int,
+    origin		varchar(45) not null,
+    destination		varchar(45) not null,
+    flightdate		varchar(45) not null,
+    aircraft		varchar(45) not null,
 	primary key (flightID)
 );
 INSERT INTO flights (flightID, depart_time, arrival_time,origin,destination,flightdate,aircraft)
 VALUES
 ('FL001',	'11:35',	'14:34','calgary','toronto','2023-12-25','boeing 747'),
 ('FL002',	'12:35',	'15:34','calgary','toronto','2023-12-25','airbus a321'),
-('FL003',	'13:35',	'16:34','calgary','toronto','2023-12-25','boeing 747'),
-('FL004',	'14:35',	'17:34','calgary','vancouver','2023-12-25','boeing a321'),
-
-('FL005',	'11:35',	'14:34','calgary','vancouver','2023-12-26','boeing 747'),
-('FL006',	'12:35',	'15:34','calgary','vancouver','2023-12-26','airbus a321'),
-
-('FL007',	'13:35',	'16:34','calgary','toronto','2023-12-27','boeing 747'),
-('FL008',	'14:35',	'17:34','calgary','toronto','2023-12-27','boeing a321'),
-
-('FL009',	'14:35',	'17:34','calgary','vancouver','2023-12-28','boeing a321'),
-('FL010',	'11:35',	'14:34','calgary','vancouver','2023-12-28','boeing 747'),
-('FL011',	'12:35',	'15:34','calgary','vancouver','2023-12-28','airbus a321'),
-
-('FL012',	'14:35',	'17:34','calgary','vancouver','2023-12-29','boeing a321'),
-('FL013',	'11:35',	'14:34','calgary','vancouver','2023-12-29','boeing 747'),
-('FL014',	'12:35',	'15:34','calgary','vancouver','2023-12-29','airbus a321');
+('FL003',	'13:35',	'16:34','calgary','toronto','2023-12-25','boeing a320'),
+('FL004',	'14:35',	'17:34','calgary','toronto','2023-12-25','boeing 737');
 
 SELECT depart_time, arrival_time,origin,destination,flightdate,aircraft FROM flights WHERE flightID ='FL002';
 
@@ -63,21 +62,6 @@ CREATE TABLE `AirlineApp`.`tickets` (
   `securitycode` INT NOT NULL,
   PRIMARY KEY (`paymentID`));
   
-ALTER TABLE tickets
+  ALTER TABLE tickets
 ADD COLUMN aircraft VARCHAR(45),
 ADD COLUMN email VARCHAR(45);
-
-INSERT INTO tickets (ticketID, paymentID, flightID, cust_lastname, cust_firstname, 
-seatID, price, depart_time, arrival_time, originOutput, destinationOutput, flightdate, aircraft, email)
-VALUES
-('001', '001', 'FL001', 'Smith', 'Tom', '16F', '2000.35', '11:35', '14:34','calgary','toronto','2023-12-25','boeing 747', 'smith@mail.com'),
-('002', '002', 'FL001', 'Brown', 'Angie', '20F', '1500.15',	'12:35', '15:34', 'calgary','toronto','2023-12-25','airbus a321', 'angie@mail.com'),
-('003', '003', 'FL002', 'Black', 'Andy', '16F', '2000.35', '13:35',	'16:34','calgary','toronto','2023-12-26','boeing 747', 'andy@mail.com'),
-('004', '004', 'FL003', 'Smith', 'Grege', '15F', '2000.15',	'14:35',	'17:34','calgary','vancouver','2023-12-28','boeing a321', 'gelm@mail.com'),
-('005', '005', 'FL006', 'Chan', 'Valerie', '14F', '2000.15',	'11:35',	'14:34','calgary','vancouver','2023-12-26','boeing 747', 'valerie@mail.com');
-
-
-#select * from users;
-select * from flights;
-select * from tickets;
-select * from payments;

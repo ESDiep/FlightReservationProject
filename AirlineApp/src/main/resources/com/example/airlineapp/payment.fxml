@@ -16,16 +16,37 @@
          <children>
             <ImageView fitHeight="262.0" fitWidth="391.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../palmtree.jpg" />
+                  <Image url="@../terminal.jpeg" />
                </image>
             </ImageView>
-            <Label layoutX="579.0" layoutY="27.0" text="Enter Passenger Info below:" />
-            <Label layoutX="496.0" layoutY="83.0" text="First Name" />
-            <Label layoutX="496.0" layoutY="123.0" text="Last Name" />
-            <Label layoutX="496.0" layoutY="171.0" text="Email" />
-            <TextField fx:id="firstname" layoutX="606.0" layoutY="76.0" promptText="First Name" />
-            <TextField fx:id="lastname" layoutX="606.0" layoutY="119.0" promptText="Last Name" />
-            <TextField fx:id="email" layoutX="606.0" layoutY="167.0" promptText="Email" />
+            <Label layoutX="579.0" layoutY="27.0" text="Enter Passenger Info below:">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label layoutX="496.0" layoutY="83.0" text="First Name">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label layoutX="496.0" layoutY="123.0" text="Last Name">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label layoutX="496.0" layoutY="171.0" text="Email">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <TextField fx:id="firstname" layoutX="606.0" layoutY="76.0" promptText="First Name">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <TextField fx:id="lastname" layoutX="606.0" layoutY="119.0" promptText="Last Name">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <TextField fx:id="email" layoutX="606.0" layoutY="167.0" promptText="Email">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
          </children></AnchorPane>
       <AnchorPane layoutY="213.0" prefHeight="489.0" prefWidth="443.0">
          <children>
@@ -34,24 +55,73 @@
                   <Font size="20.0" />
                </font>
             </TextArea>
-            <Button fx:id="goback" layoutX="128.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #71c7bd;" text="Go Back" />
+            <Button fx:id="goback" layoutX="35.0" layoutY="429.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Go Back">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font></Button>
+            <Button fx:id="button_loggedin" layoutX="233.0" layoutY="429.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #cccdd9;" text="Not Logged In" textFill="#0d0e0f">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
       <ImageView fitHeight="154.0" fitWidth="165.0" layoutX="735.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pay.png" />
          </image>
       </ImageView>
-      <Label layoutX="535.0" layoutY="322.0" text="Enter Payment Info below:" />
-      <Label layoutX="431.0" layoutY="388.0" text="Card Holder Name" />
-      <Label layoutX="431.0" layoutY="428.0" text="Credit Card Number:" />
-      <Label layoutX="431.0" layoutY="466.0" text="Security Code:" />
-      <TextField fx:id="cardholdername" layoutX="565.0" layoutY="384.0" promptText="First Last" />
-      <TextField fx:id="cardnumber" layoutX="565.0" layoutY="424.0" promptText="xxxx-xxxx-xxxx-xxxx" />
-      <TextField fx:id="cardcode" layoutX="565.0" layoutY="462.0" promptText="xxx" />
-      <Button fx:id="pay" layoutX="491.0" layoutY="587.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="154.0" style="-fx-background-color: #81c771;" text="Confrim and Pay!" />
-      <Label layoutX="500.0" layoutY="534.0" prefHeight="25.0" prefWidth="84.0" text="Ticket Price: $" />
-      <Label fx:id="ticketprice" layoutX="605.0" layoutY="538.0" text="price" />
-      <Label layoutX="431.0" layoutY="501.0" text="Promo Code:" />
-      <TextField layoutX="565.0" layoutY="497.0" promptText="PromoCode if Available" />
+      <Label layoutX="535.0" layoutY="322.0" text="Enter Payment Info below:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Label>
+      <Label layoutX="431.0" layoutY="388.0" text="Card Holder Name">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Label>
+      <Label layoutX="431.0" layoutY="428.0" text="Credit Card Number:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Label>
+      <Label layoutX="431.0" layoutY="466.0" text="Security Code:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Label>
+      <TextField fx:id="cardholdername" layoutX="585.0" layoutY="383.0" promptText="First Last">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></TextField>
+      <TextField fx:id="cardnumber" layoutX="585.0" layoutY="423.0" promptText="xxxx-xxxx-xxxx-xxxx">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></TextField>
+      <TextField fx:id="cardcode" layoutX="585.0" layoutY="461.0" promptText="xxx">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></TextField>
+      <Button fx:id="pay" layoutX="492.0" layoutY="602.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="154.0" style="-fx-background-color: #32bbbf;" text="Confrim and Pay!">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Button>
+      <Label layoutX="495.0" layoutY="558.0" prefHeight="25.0" prefWidth="107.0" text="Ticket Price: $">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Label>
+      <Label fx:id="ticketprice" layoutX="610.0" layoutY="562.0" text="price">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Label>
+      <Label layoutX="431.0" layoutY="501.0" text="Promo Code:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></Label>
+      <TextField fx:id="tf_discountcode" layoutX="585.0" layoutY="496.0" promptText="Code to Link with Email">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font></TextField>
+      <Button fx:id="button_apply" layoutX="789.0" layoutY="496.0" mnemonicParsing="false" text="Apply">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

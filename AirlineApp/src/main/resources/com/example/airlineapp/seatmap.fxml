@@ -11,19 +11,18 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.airlineapp.SeatMapController">
    <children>
-      <AnchorPane prefHeight="87.0" prefWidth="700.0" style="-fx-background-color: #bddbc2;">
+      <AnchorPane prefHeight="92.0" prefWidth="700.0" style="-fx-background-color: #bddbc2;">
          <children>
-            <Label layoutX="233.0" layoutY="36.0" text="Seat Map for Flight: ">
+            <Label layoutX="186.0" layoutY="36.0" text="Seat Map for Flight: ">
                <font>
-                  <Font size="25.0" />
+                  <Font name="Arial" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="label_flightid" layoutX="475.0" layoutY="36.0" text="FlightID">
+            <Label fx:id="label_flightid" layoutX="412.0" layoutY="36.0" text="FlightID">
                <font>
-                  <Font size="25.0" />
+                  <Font name="Arial" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="161.0" layoutY="65.0" text="Please select a seat below:" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="87.0" prefHeight="613.0" prefWidth="700.0">
@@ -38,9 +37,19 @@
             <RadioButton fx:id="rb_c1" layoutX="370.0" layoutY="223.0" mnemonicParsing="false" text="C1" textFill="#3135a4" />
             <RadioButton fx:id="rb_d1" layoutX="370.0" layoutY="332.0" mnemonicParsing="false" text="D1" textFill="#3135a4" />
             <RadioButton fx:id="rb_e1" layoutX="371.0" layoutY="441.0" mnemonicParsing="false" text="E1" textFill="#3135a4" />
-            <Button fx:id="button_cancel" layoutX="110.0" layoutY="511.0" mnemonicParsing="false" text="Cancel" />
-            <Button fx:id="button_confirmseat" layoutX="530.0" layoutY="512.0" mnemonicParsing="false" text="Confirm Seat" />
+            <Button fx:id="button_cancel" layoutX="79.0" layoutY="512.0" mnemonicParsing="false" text="Cancel">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font></Button>
+            <Button fx:id="button_confirmseat" layoutX="530.0" layoutY="512.0" mnemonicParsing="false" text="Confirm Seat">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font></Button>
             <Label layoutY="200.0" text="Lets hide the seat button after it is selected，or display the info of the seat selected,  attribute to table of status, status avaialbe" />
+            <Label layoutX="241.0" layoutY="4.0" text="Please select a seat below:">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font></Label>
          </children>
       </AnchorPane>
    </children>

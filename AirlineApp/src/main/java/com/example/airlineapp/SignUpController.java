@@ -21,9 +21,15 @@ public class SignUpController implements Initializable {
     private RadioButton rb_agent;
     @FXML
     private Button button_signup;
-
     @FXML
     private Button button_login;
+    @FXML
+    private TextField tf_firstname;
+    @FXML
+    private TextField tf_lastname;
+    @FXML
+    private TextField tf_email;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,21 +44,31 @@ public class SignUpController implements Initializable {
 	    @Override
 	    public void handle(ActionEvent event) {
 		String toggleName=((RadioButton)toggleGroup.getSelectedToggle()).getText();
-		if(!tf_username.getText().trim().isEmpty()&&!tf_password.getText().trim().isEmpty()){
-		    DBUtils.signUpUser(event,tf_username.getText(),tf_password.getText(),toggleName);
+		//added first last and email
+		if(!tf_username.getText().trim().isEmpty()&&!tf_password.getText().trim().isEmpty()&&!tf_firstname.getText().trim().isEmpty()&&!tf_lastname.getText().trim().isEmpty()&&!tf_email.getText().trim().isEmpty()){
+		    User userObject=new User();
+		    userObject.setEmail(tf_email.getText().trim());
+		    userObject.setFirstname(tf_firstname.getText().trim());
+		    userObject.setLastname(tf_lastname.getText().trim());
+		    userObject.setUsername(tf_username.getText().trim());
+		    userObject.setPassword(tf_password.getText().trim());
+		    userObject.setUsertype(toggleName);
+//		    DBUtils.signUpUser(event,tf_username.getText(),tf_password.getText(),toggleName);
+		    DBUtils.signUpUser(event,userObject);
 		}else {
-		    System.out.println("Please fill in all information");
+		    System.out.println("Please fill in ALL information");
 		    Alert alert=new Alert(Alert.AlertType.ERROR);
-		    alert.setContentText("Need all info filled in to sign up!");
+		    alert.setContentText("Requires ALL info filled out to sign up!");
 		    alert.show();
 		}
 	    }
 	});
 
+	//this is the goback button
 	button_login.setOnAction(new EventHandler<ActionEvent>() {
 	    @Override
 	    public void handle(ActionEvent event) {
-		DBUtils.changeScene(event,"login-view.fxml","you can login, from signupcontrol",null,null);
+		DBUtils.changeScene(event,"login-view.fxml","Welcome!",null);
 	    }
 	});
     }
