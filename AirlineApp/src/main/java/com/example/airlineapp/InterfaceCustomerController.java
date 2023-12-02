@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -61,7 +62,7 @@ public class InterfaceCustomerController implements Initializable {
 	});
     }
 
-    public void setUserInformation(User userObject) throws SQLException {
+    public void setUserInformation(User userObject) throws SQLException, IOException {
 //        label_welcome.setText("hello~"+userObject.getUsername()+" !");
 //        label_airline.setText("the email is: "+userObject.getEmail()+" !");
 	currentUser = DBUtils.getUserObject(userObject.getUsername());
