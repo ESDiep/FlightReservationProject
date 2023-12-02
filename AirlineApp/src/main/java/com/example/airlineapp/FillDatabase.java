@@ -13,7 +13,7 @@ public class FillDatabase {
     }
 
     public void createDB(){
-        executor.executeFile("sdb/AirlineApp.sql");
+        executor.executeFile("AirlineApp/src/main/resources/sqlScript/AirlineApp.sql");
     }
     public void fillDatabase() throws SQLException, ParseException {
         executor.generateAndInsertFlights(100);
