@@ -18,7 +18,7 @@ public class SignUpController implements Initializable {
     @FXML
     private RadioButton rb_customer;
     @FXML
-    private RadioButton rb_agent;
+    private RadioButton rb_staff;
     @FXML
     private Button button_signup;
     @FXML
@@ -35,7 +35,7 @@ public class SignUpController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 	ToggleGroup toggleGroup=new ToggleGroup();
 	rb_customer.setToggleGroup(toggleGroup);
-	rb_agent.setToggleGroup(toggleGroup);
+	rb_staff.setToggleGroup(toggleGroup);
 	rb_customer.setSelected(true);
 
 

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.airlineapp.InterfaceStaffController">
+   <children>
+      <Label fx:id="label_welcome" layoutX="261.0" layoutY="228.0" text="Welcome!">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="button_logout" layoutX="86.0" layoutY="631.0" mnemonicParsing="false" style="-fx-background-color: #ADD8E6; -fx-cursor: hand;" text="Go Back">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="label_welcome1" layoutX="555.0" layoutY="322.0" text="To Display Passenger List">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="ticketlist" layoutX="86.0" layoutY="309.0" prefHeight="189.0" prefWidth="426.0" />
+      <Label fx:id="label_welcome11" layoutX="97.0" layoutY="542.0" text="Assign Discount code: ">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label_name" layoutX="355.0" layoutY="228.0" text="Name">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="button_show" layoutX="586.0" layoutY="450.0" mnemonicParsing="false" text="Show Passenger">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="label_welcome12" layoutX="86.0" layoutY="285.0" text="TicketID -- Seat -- First Last Name  --  Email">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="189.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../airport8.jpeg" />
+         </image>
+      </ImageView>
+      <Label fx:id="label_welcome13" layoutX="593.0" layoutY="358.0" text="Enter the FlightID:">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="button_assign" layoutX="660.0" layoutY="536.0" mnemonicParsing="false" text="Assign">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="tf_flightid" layoutX="607.0" layoutY="396.0" prefHeight="35.0" prefWidth="119.0" promptText="FlightID">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tf_email" layoutX="287.0" layoutY="535.0" prefHeight="35.0" prefWidth="203.0" promptText="Enter User Email">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tf_code" layoutX="511.0" layoutY="535.0" prefHeight="35.0" prefWidth="119.0" promptText="Enter Code">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

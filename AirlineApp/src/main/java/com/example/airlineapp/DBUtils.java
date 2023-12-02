@@ -26,11 +26,20 @@ public class DBUtils {
 	Parent root = null;
 	if (userObject!= null ) {
 	    try {
-		FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
-		root = loader.load();
-		InterfaceCustomerController interfaceCustomerController = loader.getController();
-		userObject=DBUtils.getUserObject(userObject.getUsername());
-		interfaceCustomerController.setUserInformation(userObject);
+		if(userObject.getUsertype().equals("customer")){
+		    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+		    root = loader.load();
+		    InterfaceCustomerController interfaceCustomerController = loader.getController();
+		    userObject=DBUtils.getUserObject(userObject.getUsername());
+		    interfaceCustomerController.setUserInformation(userObject);
+		}else if (userObject.getUsertype().equals("staff")){
+		    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+		    root = loader.load();
+		    InterfaceStaffController interfaceStaffController = loader.getController();
+		    userObject=DBUtils.getUserObject(userObject.getUsername());
+		    interfaceStaffController.setUserInformation(userObject);
+		}
+
 	    } catch (IOException | SQLException e) {
 		e.printStackTrace();
 	    }
@@ -303,9 +312,9 @@ public class DBUtils {
 		System.out.println(userObject.toString());
 
 		if(userObject.getUsertype().equals("customer")){
-		    changeScene(event, "interface-cust.fxml", "Welcome!", userObject);
-		} else if (userObject.getUsertype().equals("agent")) {
-		    changeScene(event, "interface-cust.fxml", "Welcome!", userObject);
+		    changeScene(event, "interface-cust.fxml", "Welcome! Customer~", userObject);
+		} else if (userObject.getUsertype().equals("staff")) {
+		    changeScene(event, "interface-staff.fxml", "Welcome! Staff~", userObject);
 		}else {
 		    System.out.println("bummer");
 		}
@@ -353,7 +362,7 @@ public class DBUtils {
 
 	try {
 	    connection = connectionObject.getDBConnection();
-	    preparedStatement = connection.prepareStatement("SELECT password FROM users WHERE username =?");
+	    preparedStatement = connection.prepareStatement("SELECT password,usertype FROM users WHERE username =?");
 	    preparedStatement.setString(1, username);
 	    resultSet = preparedStatement.executeQuery();
 
@@ -365,11 +374,17 @@ public class DBUtils {
 	    } else {
 		while (resultSet.next()) {
 		    String retrievedPassword = resultSet.getString("password");
+		    String usertype=resultSet.getString("usertype");
 		    if (retrievedPassword.equals(password)) {
 			User userObject=new User();
 			userObject.setUsername(username);
 			userObject.setPassword(password);
-			changeScene(event, "interface-cust.fxml", "Welcome! ", userObject);
+			userObject.setUsertype(usertype);
+			if(usertype.equals("customer")){
+			    changeScene(event, "interface-cust.fxml", "Welcome! Customer~", userObject);
+			} else if (usertype.equals("staff")) {
+			    changeScene(event, "interface-staff.fxml", "Welcome! Staff~", userObject);
+			}
 		    } else {
 			System.out.println("password did not match");
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -766,6 +781,149 @@ public class DBUtils {
 		alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
 		alert.show();
 	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+
+	    if (resultSet != null) {
+		try {
+		    resultSet.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (connection != null) {
+		try {
+		    connection.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (preparedStatement != null) {
+		try {
+		    preparedStatement.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    public static void showPassenger(ActionEvent event, String flightID, ListView<String> listview_box) {
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+
+	try {
+	    connection = connectionObject.getDBConnection();
+	    preparedStatement = connection.prepareStatement("SELECT flightID FROM flights WHERE flightID =? ");
+	    preparedStatement.setString(1, flightID);
+	    resultSet = preparedStatement.executeQuery();
+	    if(!resultSet.next()){
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setContentText("Flight Not Found!");
+		alert.show();
+	    }else {
+
+		preparedStatement = connection.prepareStatement("SELECT ticketID,cust_firstname,cust_lastname,seatID,email FROM tickets WHERE flightID =? ");
+		preparedStatement.setString(1, flightID);
+		resultSet = preparedStatement.executeQuery();
+
+		while (resultSet.next()) {
+		    String ticketID = resultSet.getString("ticketID");
+		    String cust_firstname = resultSet.getString("cust_firstname");
+		    String cust_lastname = resultSet.getString("cust_lastname");
+		    String seatID = resultSet.getString("seatID");
+		    String email = resultSet.getString("email");
+
+//		Ticket ticket=DBUtils.getTicketObject(ticketID);
+//		String listOut = ticket.getTicketID() + "    " +ticket.getFlightID() + "    " + ticket.getOriginOutput() + "    " + ticket.getDestinationOutput() + "    " + ticket.getFlightdate() + "    " + ticket.getDepart_time()+ "    " + ticket.getArrival_time();
+		    String listOut = ticketID + "    " + seatID + "      " + cust_firstname + "  " + cust_lastname+ "      " + email;
+		    listview_box.getItems().add(listOut);//populate listview with values
+		}
+
+		//select item from the list
+//		if (listview_box != null) {
+//		    listview_box.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//			@Override
+//			public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+//			    //everytime an item is selected, this function changed will be called.
+//			    if (t1 != null) {//this if{} is added to handle clear the listview_box after each time search is pressed.
+//				String var = listview_box.getSelectionModel().getSelectedItem().substring(0, 7).trim();
+//				try {
+//				    Ticket temp = DBUtils.getTicketObject(var);
+//				    outsideUserObject.setEmail(temp.getEmail());
+//
+//				} catch (SQLException e) {
+//				    throw new RuntimeException(e);
+//				}
+//
+//			    }
+//			}
+//		    });
+//		}
+	    }
+
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+
+	    if (resultSet != null) {
+		try {
+		    resultSet.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (connection != null) {
+		try {
+		    connection.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (preparedStatement != null) {
+		try {
+		    preparedStatement.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    public static void assignDiscount(String email, String code) {
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+
+	try {
+	    connection = connectionObject.getDBConnection();
+	    preparedStatement = connection.prepareStatement("SELECT email FROM users WHERE email =? ");
+	    preparedStatement.setString(1, email);
+	    resultSet = preparedStatement.executeQuery();
+	    if(!resultSet.next()){
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setContentText("User with that Email Not Found\nTry different Email");
+		alert.show();
+	    }else {
+
+		preparedStatement = connection.prepareStatement("UPDATE users SET discountcode =?  WHERE email =?");
+		preparedStatement.setString(1, code);
+		preparedStatement.setString(2, email);
+		preparedStatement.executeUpdate();
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("New Discount Code Assigned!");
+		alert.setHeaderText("New Discount Code Assigned!"); // Optional: You can set a header text if needed
+		alert.setContentText("Discount Code: " + code + "\nSent to Email: " + email);
+		alert.showAndWait();
+	    }
+
+
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	} finally {
