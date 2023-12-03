@@ -236,11 +236,11 @@ public class DBUtils {
 
 	    Booking.setDiscountApplied(false);
 	    //code below was outside
-	    System.out.println("Payment is Confirmed with unique paymentID:" + ticket.getPaymentID() + "\nTicket is booked with unique TicketID:" + ticket.getTicketID() + "\nConfirmation Email is sent to:" + ticket.getEmail());
+	    System.out.println("Ticket is booked with unique TicketID:" + ticket.getTicketID() + "\nPayment is Confirmed with unique paymentID:" + ticket.getPaymentID() + "\nConfirmation Email is sent to:" + ticket.getEmail());
 	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	    alert.setTitle("Payment is Confirmed, Ticket is booked!");
 	    alert.setHeaderText(null); // Optional: You can set a header text if needed
-	    alert.setContentText("Payment is Confirmed with unique paymentID:" + ticket.getPaymentID() + "\nTicket is booked with unique TicketID:" + ticket.getTicketID() + "\nConfirmation Email is sent to:" + ticket.getEmail());
+	    alert.setContentText("Ticket is booked with unique TicketID:" + ticket.getTicketID() + "\nPayment is Confirmed with unique paymentID:" + ticket.getPaymentID() + "\nConfirmation Email is sent to:" + ticket.getEmail());
 	    alert.showAndWait();
 
 
