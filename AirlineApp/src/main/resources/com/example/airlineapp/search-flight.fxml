@@ -11,61 +11,83 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.airlineapp.SearchFlightController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+   prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.airlineapp.SearchFlightController">
    <children>
-      <AnchorPane layoutX="244.0" prefHeight="223.0" prefWidth="756.0" style="-fx-background-color: #a8b4bf;">
+      <AnchorPane layoutX="244.0" prefHeight="223.0" prefWidth="756.0"
+         style="-fx-background-color: #a8b4bf;">
          <children>
             <Label layoutX="123.0" layoutY="43.0" text="Origin">
                <font>
                   <Font size="18.0" />
-               </font></Label>
+               </font>
+            </Label>
             <Label layoutX="123.0" layoutY="95.0" text="Destination">
                <font>
                   <Font size="18.0" />
-               </font></Label>
-            <TextField fx:id="tf_origin" layoutX="228.0" layoutY="36.0" prefHeight="35.0" prefWidth="222.0" promptText="Enter Flight Origin">
+               </font>
+            </Label>
+            <TextField fx:id="tf_origin" layoutX="228.0" layoutY="36.0" prefHeight="35.0"
+               prefWidth="222.0" promptText="Enter Flight Origin">
                <font>
                   <Font size="15.0" />
-               </font></TextField>
-            <TextField fx:id="tf_destination" layoutX="228.0" layoutY="91.0" prefHeight="35.0" prefWidth="222.0" promptText="Enter Flight Destination">
+               </font>
+            </TextField>
+            <TextField fx:id="tf_destination" layoutX="228.0" layoutY="91.0" prefHeight="35.0"
+               prefWidth="222.0" promptText="Enter Flight Destination">
                <font>
                   <Font size="15.0" />
-               </font></TextField>
+               </font>
+            </TextField>
             <Label layoutX="123.0" layoutY="152.0" text="Date">
                <font>
                   <Font size="18.0" />
-               </font></Label>
-            <Button fx:id="button_search" layoutX="545.0" layoutY="91.0" mnemonicParsing="false" text="Search">
+               </font>
+            </Label>
+            <DatePicker fx:id="datepicker" layoutX="228.0" layoutY="142.0" onAction="#getDate"
+            prefHeight="42.0" prefWidth="222.0" promptText="Enter a Date YYYY-MM-DD" />
+            <Button fx:id="button_search" layoutX="545.0" layoutY="91.0" mnemonicParsing="false"
+               text="Search">
                <font>
                   <Font size="18.0" />
-               </font></Button>
-            <DatePicker fx:id="datepicker" layoutX="228.0" layoutY="142.0" onAction="#getDate" prefHeight="42.0" prefWidth="222.0" promptText="Enter a Date YYYY-MM-DD" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="-14.0" prefHeight="815.0" prefWidth="222.0" style="-fx-background-color: #94c1eb;">
+      <AnchorPane layoutY="-14.0" prefHeight="815.0" prefWidth="222.0"
+         style="-fx-background-color: #94c1eb;">
          <children>
-            <ImageView fitHeight="275.0" fitWidth="254.0" layoutX="-3.0" layoutY="-37.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="275.0" fitWidth="254.0" layoutX="-3.0" layoutY="-37.0"
+               pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Screenshot%202023-12-01%20at%2012.21.32%E2%80%AFAM.png" />
                </image>
             </ImageView>
-            <Button fx:id="button_login" layoutX="52.0" layoutY="500.0" mnemonicParsing="false" text="Login or Register">
+            <Button fx:id="button_login" layoutX="52.0" layoutY="500.0" mnemonicParsing="false"
+               text="Login or Register">
                <font>
                   <Font size="18.0" />
-               </font></Button>
-            <Button fx:id="button_cancel" layoutX="58.0" layoutY="623.0" mnemonicParsing="false" text="Cancel Ticket">
+               </font>
+            </Button>
+            <Button fx:id="button_cancel" layoutX="58.0" layoutY="623.0" mnemonicParsing="false"
+               text="Cancel Ticket">
                <font>
                   <Font size="18.0" />
-               </font></Button>
+               </font>
+            </Button>
             <Label layoutX="22.0" layoutY="457.0" text="Register and Login Service">
                <font>
                   <Font size="18.0" />
-               </font></Label>
+               </font>
+            </Label>
             <Label layoutX="37.0" layoutY="582.0" text="Want to cancel a ticket?">
                <font>
                   <Font size="18.0" />
-               </font></Label>
-            <Button fx:id="button_loggedin" layoutX="57.0" layoutY="710.0" mnemonicParsing="false" style="-fx-background-color: #b97920;" text="Not Logged In" textFill="#ebebeb">
+               </font>
+            </Label>
+            <Button fx:id="button_loggedin" layoutX="57.0" layoutY="710.0" mnemonicParsing="false"
+               style="-fx-background-color: #b97920;" text="Not Logged In" textFill="#ebebeb">
                <font>
                   <Font size="18.0" />
                </font>
@@ -82,26 +104,35 @@
             </Label>
          </children>
       </AnchorPane>
-      <ListView fx:id="listview_box" layoutX="367.0" layoutY="316.0" prefHeight="365.0" prefWidth="511.0" />
-      <Button fx:id="button_confirmselection" layoutX="685.0" layoutY="710.0" mnemonicParsing="false" text="Confirm Selection">
+      <ListView fx:id="listview_box" layoutX="367.0" layoutY="316.0" prefHeight="365.0"
+         prefWidth="511.0" />
+      <Button fx:id="button_confirmselection" layoutX="685.0" layoutY="710.0"
+         mnemonicParsing="false" text="Confirm Selection">
          <font>
             <Font size="18.0" />
-         </font></Button>
+         </font>
+      </Button>
       <Label fx:id="label_select" layoutX="476.0" layoutY="716.0" text="Nothing">
          <font>
             <Font size="18.0" />
-         </font></Label>
-      <Label layoutX="544.0" layoutY="716.0" prefHeight="17.0" prefWidth="130.0" text="is selected .">
+         </font>
+      </Label>
+      <Label layoutX="544.0" layoutY="716.0" prefHeight="17.0" prefWidth="130.0"
+         text=" is selected .">
          <font>
             <Font size="18.0" />
-         </font></Label>
+         </font>
+      </Label>
       <Label layoutX="367.0" layoutY="253.0" text="Flight Info to be displayed below:">
          <font>
             <Font size="18.0" />
-         </font></Label>
-      <Label layoutX="367.0" layoutY="299.0" prefHeight="19.0" prefWidth="526.0" text="FlightID - Depart &amp;&amp; Arrival    -    Origin - Destination   - Flightdate   -   Aircraft">
+         </font>
+      </Label>
+      <Label layoutX="367.0" layoutY="299.0" prefHeight="19.0" prefWidth="526.0"
+         text="FlightID - Depart &amp;&amp; Arrival    -    Origin - Destination   - Flightdate   -   Aircraft">
          <font>
             <Font size="15.0" />
-         </font></Label>
+         </font>
+      </Label>
    </children>
 </Pane>
