@@ -1,8 +1,6 @@
+DROP DATABASE IF EXISTS airlineapp;
+CREATE DATABASE airlineapp;
 use airlineapp;
-select * from users;
-select * from flights;
-select * from tickets;
-select * from payments;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE `AirlineApp`.`users` (
@@ -15,8 +13,6 @@ CREATE TABLE `AirlineApp`.`users` (
   `discountcode` VARCHAR(45) NULL,
   PRIMARY KEY (`username`));
   
-  UPDATE `airlineapp`.`users` SET `discountcode` = '9999' WHERE (`username` = 'jj');
-  
 DROP TABLE IF EXISTS flights;
 CREATE TABLE flights (
 	flightID			varchar(45) not null,
@@ -28,14 +24,12 @@ CREATE TABLE flights (
     aircraft		varchar(45) not null,
 	primary key (flightID)
 );
-INSERT INTO flights (flightID, depart_time, arrival_time,origin,destination,flightdate,aircraft)
-VALUES
-('FL001',	'11:35',	'14:34','calgary','toronto','2023-12-25','boeing 747'),
-('FL002',	'12:35',	'15:34','calgary','toronto','2023-12-25','airbus a321'),
-('FL003',	'13:35',	'16:34','calgary','toronto','2023-12-25','boeing a320'),
-('FL004',	'14:35',	'17:34','calgary','toronto','2023-12-25','boeing 737');
-
-SELECT depart_time, arrival_time,origin,destination,flightdate,aircraft FROM flights WHERE flightID ='FL002';
+-- INSERT INTO flights (flightID, depart_time, arrival_time,origin,destination,flightdate,aircraft)
+-- VALUES
+-- ('FL001',	'11:35',	'14:34','calgary','toronto','2023-12-25','boeing 747'),
+-- ('FL002',	'12:35',	'15:34','calgary','toronto','2023-12-25','airbus a321'),
+-- ('FL003',	'13:35',	'16:34','calgary','toronto','2023-12-25','boeing a320'),
+-- ('FL004',	'14:35',	'17:34','calgary','toronto','2023-12-25','boeing 737');
 
 DROP TABLE IF EXISTS tickets;
 CREATE TABLE `AirlineApp`.`tickets` (
@@ -46,6 +40,8 @@ CREATE TABLE `AirlineApp`.`tickets` (
   `cust_firstname` VARCHAR(45) NOT NULL,
   `seatID` VARCHAR(45) NOT NULL,
   `price` float NOT NULL,
+  `aircraft` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   `depart_time` VARCHAR(45) NOT NULL,
   `arrival_time` VARCHAR(45) NOT NULL,
   `originOutput` VARCHAR(45) NOT NULL,
@@ -62,6 +58,8 @@ CREATE TABLE `AirlineApp`.`tickets` (
   `securitycode` INT NOT NULL,
   PRIMARY KEY (`paymentID`));
   
-  ALTER TABLE tickets
-ADD COLUMN aircraft VARCHAR(45),
-ADD COLUMN email VARCHAR(45);
+select * from users;
+select * from flights;
+select * from tickets;
+select * from payments;
+  

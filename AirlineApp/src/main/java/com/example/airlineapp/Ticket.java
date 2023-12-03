@@ -179,6 +179,6 @@ public class Ticket {
 
     public void setFlightID(String flightID) {
         this.flightID = flightID;
-        System.out.println("Ticket flightID is set to: "+flightID);
+//        System.out.println("Ticket flightID is set to: "+flightID);
     }
 }

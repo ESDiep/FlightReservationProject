@@ -77,7 +77,7 @@ public class SearchFlightController implements Initializable {
 		    alert.setContentText("No flight has been selected!3");
 		    alert.show();
 		} else {
-		    System.out.println("ticketID:" + ticket.getFlightID());
+//		    System.out.println("ticketID:" + ticket.getFlightID());
 		    if(ticket.getAircraft().equals("boeing 747")){
 			DBUtils.changeSceneToSeatMapTwo(event, "seatmapTwo.fxml", "Seat Map Two", ticket);
 		    }else {

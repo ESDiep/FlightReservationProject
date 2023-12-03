@@ -113,7 +113,7 @@ public class SeatMapTwoController implements Initializable {
 		    ticket.setPrice(price);
 		    ticket.setSeatID(toggleName);
 		    System.out.println("Selected Seat: "+toggleName+" Price: "+price);
-		    System.out.println(ticket.toString());
+//		    System.out.println(ticket.toString());
 		    DBUtils.changeSceneToPay(event,"payment.fxml","Payment",ticket);
 		}
 	    }

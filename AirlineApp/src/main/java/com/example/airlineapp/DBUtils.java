@@ -515,7 +515,7 @@ public class DBUtils {
 		    String destinationOutput = resultSet.getString("destination");
 		    String flightdate = resultSet.getString("flightdate");
 		    String aircraft = resultSet.getString("aircraft");
-		    String listOut = flightID + "\t\t" + depart_time + "\t\t" + arrival_time + "\t\t" + originOutput + "\t\t" + destinationOutput + "\t\t" + flightdate + "\t\t" + aircraft;
+		    String listOut = flightID + "\t\t" + depart_time + "\t\t" + arrival_time + "\t\t" + originOutput + "\t\t" + destinationOutput + "\t" + flightdate + "\t" + aircraft;
 		    listview_box.getItems().add(listOut);//populate listview with values
 		}
 
