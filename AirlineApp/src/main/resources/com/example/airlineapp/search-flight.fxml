@@ -55,6 +55,14 @@
             </Button>
          </children>
       </AnchorPane>
+      <ListView fx:id="listview_box" layoutX="367.0" layoutY="316.0" prefHeight="365.0"
+         prefWidth="511.0" />
+      <Button fx:id="button_confirmselection" layoutX="685.0" layoutY="710.0"
+         mnemonicParsing="false" text="Confirm Selection">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
       <AnchorPane layoutY="-14.0" prefHeight="815.0" prefWidth="222.0"
          style="-fx-background-color: #94c1eb;">
          <children>
@@ -104,14 +112,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <ListView fx:id="listview_box" layoutX="367.0" layoutY="316.0" prefHeight="365.0"
-         prefWidth="511.0" />
-      <Button fx:id="button_confirmselection" layoutX="685.0" layoutY="710.0"
-         mnemonicParsing="false" text="Confirm Selection">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <Label fx:id="label_select" layoutX="476.0" layoutY="716.0" text="Nothing">
          <font>
             <Font size="18.0" />
