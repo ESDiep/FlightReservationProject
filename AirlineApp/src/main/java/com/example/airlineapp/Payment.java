@@ -3,7 +3,7 @@ package com.example.airlineapp;
 public class Payment {
     private int paymentID;
     private String cardholdername;
-    private int cardnumber;
+    private String cardnumber;
     private int cardcode;
 
     public int getPaymentID() {
@@ -22,11 +22,11 @@ public class Payment {
 	this.cardholdername = cardholdername;
     }
 
-    public int getCardnumber() {
+    public String getCardnumber() {
 	return cardnumber;
     }
 
-    public void setCardnumber(int cardnumber) {
+    public void setCardnumber(String cardnumber) {
 	this.cardnumber = cardnumber;
     }
 
