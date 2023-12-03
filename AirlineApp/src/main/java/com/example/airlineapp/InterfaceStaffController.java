@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -79,7 +80,7 @@ public class InterfaceStaffController implements Initializable {
 	});
     }
 
-    public void setUserInformation(User userObject) throws SQLException {
+    public void setUserInformation(User userObject) throws SQLException, IOException {
 //        label_welcome.setText("hello~"+userObject.getUsername()+" !");
 //        label_airline.setText("the email is: "+userObject.getEmail()+" !");
 	currentUser = DBUtils.getUserObject(userObject.getUsername());
