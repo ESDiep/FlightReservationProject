@@ -868,19 +868,26 @@ public class DBUtils {
 
 	    if (resultSet.next()) {
 		String discountcode = resultSet.getString("discountcode");
-		if (discountcode.equals(tf_discountcode.getText())) {
-		    ticket.setPrice(ticket.getPrice() * 0.8);
-		    Booking.setDiscountApplied(true);
-
-		    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		    alert.setHeaderText("Discount Applied!"); // Optional
-		    alert.setContentText("Congratulations!\nYou get a 20% discount");
-		    alert.show();
-		} else {
+		if(discountcode==null){
 		    Alert alert = new Alert(Alert.AlertType.ERROR);
 		    alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
 		    alert.show();
+		}else {
+		    if (discountcode.equals(tf_discountcode.getText())) {
+			ticket.setPrice(ticket.getPrice() * 0.8);
+			Booking.setDiscountApplied(true);
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText("Discount Applied!"); // Optional
+			alert.setContentText("Congratulations!\nYou get a 20% discount");
+			alert.show();
+		    } else {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
+			alert.show();
+		    }
 		}
+
 	    } else {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
