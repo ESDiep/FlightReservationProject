@@ -45,42 +45,42 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket Information: \n" +
-                "\nflightID='" + flightID + '\'' +
-                ", \nseatID='" + seatID + '\'' +
-                ", \nprice= $" + price +
-                ", \ndepart_time='" + depart_time + '\'' +
-                ", \narrival_time='" + arrival_time + '\'' +
-                ", \norigin='" + originOutput + '\'' +
-                ", \ndestination='" + destinationOutput + '\'' +
-                ", \nflightdate='" + flightdate + '\'' +
-                ", \naircraft='" + aircraft + '\'';
+                "\nFlightID:  " + flightID  +
+                ", \nSeatID:  " + seatID  +
+                ", \nPrice:  $" + price +
+                ", \nDepart time:  " + depart_time  +
+                ", \nArrival time:  " + arrival_time  +
+                ", \nOrigin:  " + originOutput  +
+                ", \nDestination:  " + destinationOutput  +
+                ", \nFlightdate:  " + flightdate  +
+                ", \nAircraft:  " + aircraft ;
     }
 
     public String toStringForCancel() {
         return "Ticket Information: \n" +
-                "\nPassenger First Name='" + cust_firstname + '\'' +
-                "\nLast Name='" + cust_lastname + '\'' +
-                "\nflightID='" + flightID + '\'' +
-                ", \nseatID='" + seatID + '\'' +
-                ", \nprice= $" + price +
-                ", \ndepart_time='" + depart_time + '\'' +
-                ", \narrival_time='" + arrival_time + '\'' +
-                ", \norigin='" + originOutput + '\'' +
-                ", \ndestination='" + destinationOutput + '\'' +
-                ", \nflightdate='" + flightdate + '\'' +
-                ", \nEmail='" + email + '\'';
+                "\nPassenger First Name:  " + cust_firstname  +
+                "\nLast Name:  " + cust_lastname  +
+                "\nFlightID:  " + flightID  +
+                ", \nSeatID:  " + seatID  +
+                ", \nPrice:  $" + price +
+                ", \nDepart time:  " + depart_time  +
+                ", \nArrival time:  " + arrival_time  +
+                ", \nOrigin:  " + originOutput  +
+                ", \nDestination:  " + destinationOutput  +
+                ", \nFlight Date:  " + flightdate  +
+                ", \nEmail:  " + email ;
     }
 
     public String toStringForDisplay() {
-        return  "\nPassenger First Name='" + cust_firstname + '\'' +
-                "\nLast Name='" + cust_lastname + '\'' +
-                "\nTicketID='" + ticketID + '\'' +
-                "\nPaymentID='" + paymentID + '\'' +
-                "\nflightID='" + flightID + '\'' +
-                ", \nseatID='" + seatID + '\'' +
-                ", \nprice= $" + price +
-                ", \nAircraft= " + aircraft +
-                ", \nEmail='" + email + '\'';
+        return  "\nPassenger First Name:  " + cust_firstname  +
+                "\nLast Name:  " + cust_lastname  +
+                "\nTicketID:  " + ticketID +
+                "\nPaymentID:  " + paymentID  +
+                "\nFlightID:  " + flightID  +
+                ", \nSeatID:  " + seatID  +
+                ", \nPrice:  $" + price +
+                ", \nAircraft:  " + aircraft +
+                ", \nEmail:  " + email ;
     }
 
     private String aircraft;
@@ -172,11 +172,6 @@ public class Ticket {
         this.seatID = seatID;
     }
 
-
-
-//    public Ticket(String flightID) {
-//	this.flightID = flightID;
-//    }
 
     public String getFlightID() {
         return flightID;

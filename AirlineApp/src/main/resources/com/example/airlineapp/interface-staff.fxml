@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.airlineapp.InterfaceStaffController">
    <children>
-      <Label fx:id="label_welcome" layoutX="261.0" layoutY="228.0" text="Welcome!">
+      <Label fx:id="label_welcome" layoutX="281.0" layoutY="222.0" text="Welcome to Staff Interface!">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -32,7 +32,7 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="label_name" layoutX="355.0" layoutY="228.0" text="Name">
+      <Label fx:id="label_name" layoutX="528.0" layoutY="222.0" text="Name">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
@@ -47,9 +47,9 @@
             <Font name="Arial" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="189.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="195.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../airport8.jpeg" />
+            <Image url="@../airport8.png" />
          </image>
       </ImageView>
       <Label fx:id="label_welcome13" layoutX="593.0" layoutY="358.0" text="Enter the FlightID:">

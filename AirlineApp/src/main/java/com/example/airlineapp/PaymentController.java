@@ -93,7 +93,13 @@ public class PaymentController implements Initializable {
         goback.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeSceneToSeatMap(event,"seatmap.fxml","Welcome!",ticket);
+//                DBUtils.changeSceneToSeatMap(event,"seatmap.fxml","Welcome!",ticket);
+
+                if(ticket.getAircraft().equals("boeing 747")){
+                    DBUtils.changeSceneToSeatMapTwo(event, "seatmapTwo.fxml", "Seat Map Two", ticket);
+                }else {
+                    DBUtils.changeSceneToSeatMap(event, "seatmap.fxml", "Seat Map", ticket);
+                }
             }
         });
     }

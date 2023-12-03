@@ -19,24 +19,22 @@ import java.util.Optional;
 import java.util.Random;
 
 public class DBUtils {
-
-
     //helper class, can not be instantiated. contains just static methods
     public static void changeScene(ActionEvent event, String fxmlFile, String title, User userObject) {
 	Parent root = null;
-	if (userObject!= null ) {
+	if (userObject != null) {
 	    try {
-		if(userObject.getUsertype().equals("customer")){
+		if (userObject.getUsertype().equals("customer")) {
 		    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
 		    root = loader.load();
 		    InterfaceCustomerController interfaceCustomerController = loader.getController();
-		    userObject=DBUtils.getUserObject(userObject.getUsername());
+		    userObject = DBUtils.getUserObject(userObject.getUsername());
 		    interfaceCustomerController.setUserInformation(userObject);
-		}else if (userObject.getUsertype().equals("staff")){
+		} else if (userObject.getUsertype().equals("staff")) {
 		    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
 		    root = loader.load();
 		    InterfaceStaffController interfaceStaffController = loader.getController();
-		    userObject=DBUtils.getUserObject(userObject.getUsername());
+		    userObject = DBUtils.getUserObject(userObject.getUsername());
 		    interfaceStaffController.setUserInformation(userObject);
 		}
 
@@ -68,7 +66,7 @@ public class DBUtils {
 	    if (ticket.getFlightID() == null) {
 		System.out.println("No flight has been selected!");
 		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setContentText("No flight has been selected!");
+		alert.setContentText("No flight has been selected!2");
 		alert.show();
 	    } else {
 		try {
@@ -114,7 +112,70 @@ public class DBUtils {
 		stage.show();
 	    }
 	} catch (NullPointerException e) {
-	    showAlert("Error", "No flight has been selected!");
+	    showAlert("Error", "No flight has been selected!1");
+	    e.printStackTrace();
+	}
+    }
+
+    public static void changeSceneToSeatMapTwo(ActionEvent event, String fxmlFile, String title, Ticket ticket) {
+	Parent root = null;
+
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+
+	try {
+	    if (ticket.getFlightID() == null) {
+		System.out.println("No flight has been selected!");
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setContentText("No flight has been selected!2");
+		alert.show();
+	    } else {
+		try {
+		    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+
+		    // Custom controller factory to pass the Ticket object
+		    loader.setControllerFactory(param -> {
+			if (param == SeatMapTwoController.class) {
+			    return new SeatMapTwoController(ticket);
+			} else {
+			    // Return the default controller if not SeatMapController
+			    try {
+				return param.getDeclaredConstructor().newInstance();
+			    } catch (Exception e) {
+				throw new RuntimeException(e);
+			    }
+			}
+		    });
+		    root = loader.load();
+
+		    connection = connectionObject.getDBConnection();
+		    preparedStatement = connection.prepareStatement("SELECT depart_time, arrival_time,origin,destination,flightdate,aircraft FROM flights WHERE flightID =?");
+		    preparedStatement.setString(1, ticket.getFlightID());
+		    resultSet = preparedStatement.executeQuery();
+		    resultSet.next();
+		    ticket.setAircraft(resultSet.getString("aircraft"));
+		    ticket.setDepart_time(resultSet.getString("depart_time"));
+		    ticket.setArrival_time(resultSet.getString("arrival_time"));
+		    ticket.setOriginOutput(resultSet.getString("origin"));
+		    ticket.setDestinationOutput(resultSet.getString("destination"));
+		    ticket.setFlightdate(resultSet.getString("flightdate"));
+		    Booking.setDiscountApplied(false);
+
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setTitle(title);
+		stage.setScene(new Scene(root));
+		stage.show();
+	    }
+	} catch (NullPointerException e) {
+	    showAlert("Error", "No flight has been selected!1");
 	    e.printStackTrace();
 	}
     }
@@ -194,27 +255,27 @@ public class DBUtils {
 	    e.printStackTrace();
 	} finally {
 
-	if (resultSet != null) {
-	    try {
-		resultSet.close();
-	    } catch (SQLException e) {
-		e.printStackTrace();
+	    if (resultSet != null) {
+		try {
+		    resultSet.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
 	    }
-	}
-	if (connection != null) {
-	    try {
-		connection.close();
-	    } catch (SQLException e) {
-		e.printStackTrace();
+	    if (connection != null) {
+		try {
+		    connection.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
 	    }
-	}
-	if (psInsertPayment != null) {
-	    try {
-		psInsertPayment.close();
-	    } catch (SQLException e) {
-		e.printStackTrace();
+	    if (psInsertPayment != null) {
+		try {
+		    psInsertPayment.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
 	    }
-	}
 	    if (psInsert != null) {
 		try {
 		    psInsert.close();
@@ -222,9 +283,7 @@ public class DBUtils {
 		    e.printStackTrace();
 		}
 	    }
-    }
-
-
+	}
 
 
     }
@@ -311,11 +370,11 @@ public class DBUtils {
 		psInsert.executeUpdate();
 		System.out.println(userObject.toString());
 
-		if(userObject.getUsertype().equals("customer")){
+		if (userObject.getUsertype().equals("customer")) {
 		    changeScene(event, "interface-cust.fxml", "Welcome! Customer~", userObject);
 		} else if (userObject.getUsertype().equals("staff")) {
 		    changeScene(event, "interface-staff.fxml", "Welcome! Staff~", userObject);
-		}else {
+		} else {
 		    System.out.println("bummer");
 		}
 	    }
@@ -374,13 +433,13 @@ public class DBUtils {
 	    } else {
 		while (resultSet.next()) {
 		    String retrievedPassword = resultSet.getString("password");
-		    String usertype=resultSet.getString("usertype");
+		    String usertype = resultSet.getString("usertype");
 		    if (retrievedPassword.equals(password)) {
-			User userObject=new User();
+			User userObject = new User();
 			userObject.setUsername(username);
 			userObject.setPassword(password);
 			userObject.setUsertype(usertype);
-			if(usertype.equals("customer")){
+			if (usertype.equals("customer")) {
 			    changeScene(event, "interface-cust.fxml", "Welcome! Customer~", userObject);
 			} else if (usertype.equals("staff")) {
 			    changeScene(event, "interface-staff.fxml", "Welcome! Staff~", userObject);
@@ -427,7 +486,6 @@ public class DBUtils {
 	DatabaseConnection connectionObject = new DatabaseConnection();
 
 	try {
-//	    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/AirlineApp", "root", "12345678");
 	    connection = connectionObject.getDBConnection();
 	    preparedStatement = connection.prepareStatement("SELECT origin, destination,flightdate FROM flights WHERE origin =? AND destination=? AND flightdate=?");
 	    preparedStatement.setString(1, origin);
@@ -467,9 +525,11 @@ public class DBUtils {
 		    public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
 			//everytime an item is selected, this function changed will be called.
 			if (t1 != null) {//this if{} is added to handle clear the listview_box after each time search is pressed.
-			    String var = listview_box.getSelectionModel().getSelectedItem().substring(0, 7).trim();
-			    label_select.setText(var);
-			    ticket.setFlightID(var);
+			    String extractedFlightID = listview_box.getSelectionModel().getSelectedItem().substring(0, 7).trim();
+			    label_select.setText(extractedFlightID);
+			    ticket.setFlightID(extractedFlightID);
+			    ticket.setAircraft(DBUtils.getAircraft(extractedFlightID));
+
 			}
 		    }
 		});
@@ -503,6 +563,51 @@ public class DBUtils {
 	}
     }
 
+    private static String getAircraft(String extractedFlightID) {
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+	String aircraft = null;
+	try {
+	    connection = connectionObject.getDBConnection();
+	    preparedStatement = connection.prepareStatement("SELECT aircraft FROM flights WHERE flightID =? ");
+	    preparedStatement.setString(1, extractedFlightID);
+	    resultSet = preparedStatement.executeQuery();
+	    while (resultSet.next()) {
+		aircraft = resultSet.getString("aircraft");
+	    }
+
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+
+	    if (resultSet != null) {
+		try {
+		    resultSet.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (connection != null) {
+		try {
+		    connection.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (preparedStatement != null) {
+		try {
+		    preparedStatement.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+
+	return aircraft;
+    }
+
     public static Ticket getTicketObject(String ticketID) throws SQLException {
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
@@ -517,19 +622,19 @@ public class DBUtils {
 	resultSet = preparedStatement.executeQuery();
 
 	resultSet.next();
-	    String paymentID = resultSet.getString("paymentID");
-	    String flightID = resultSet.getString("flightID");
-	    String cust_lastname = resultSet.getString("cust_lastname");
-	    String cust_firstname = resultSet.getString("cust_firstname");
-	    String seatID = resultSet.getString("seatID");
-	    String depart_time = resultSet.getString("depart_time");
-	    String arrival_time = resultSet.getString("arrival_time");
-	    String originOutput = resultSet.getString("originOutput");
-	    String destinationOutput = resultSet.getString("destinationOutput");
-	    String flightdate = resultSet.getString("flightdate");
-	    String price = resultSet.getString("price");
-	    String aircraft = resultSet.getString("aircraft");
-	    String email = resultSet.getString("email");
+	String paymentID = resultSet.getString("paymentID");
+	String flightID = resultSet.getString("flightID");
+	String cust_lastname = resultSet.getString("cust_lastname");
+	String cust_firstname = resultSet.getString("cust_firstname");
+	String seatID = resultSet.getString("seatID");
+	String depart_time = resultSet.getString("depart_time");
+	String arrival_time = resultSet.getString("arrival_time");
+	String originOutput = resultSet.getString("originOutput");
+	String destinationOutput = resultSet.getString("destinationOutput");
+	String flightdate = resultSet.getString("flightdate");
+	String price = resultSet.getString("price");
+	String aircraft = resultSet.getString("aircraft");
+	String email = resultSet.getString("email");
 
 
 	tempTicketObject.setPaymentID(Integer.parseInt(paymentID));
@@ -546,16 +651,17 @@ public class DBUtils {
 	tempTicketObject.setEmail(email);
 	tempTicketObject.setPrice(Double.parseDouble(price));
 
-	    return tempTicketObject;
+	return tempTicketObject;
 
     }
+
     public static User getUserObject(String username) throws SQLException {
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
 	DatabaseConnection connectionObject = new DatabaseConnection();
 
-	User tempUserObject=new User();
+	User tempUserObject = new User();
 	tempUserObject.setUsername(username);
 
 	connection = connectionObject.getDBConnection();
@@ -564,11 +670,11 @@ public class DBUtils {
 	resultSet = preparedStatement.executeQuery();
 
 	resultSet.next();
-	String usertype=resultSet.getString("usertype");
-	String email=resultSet.getString("email");
-	String lastname=resultSet.getString("lastname");
-	String firstname=resultSet.getString("firstname");
-	String discountcode=resultSet.getString("discountcode");
+	String usertype = resultSet.getString("usertype");
+	String email = resultSet.getString("email");
+	String lastname = resultSet.getString("lastname");
+	String firstname = resultSet.getString("firstname");
+	String discountcode = resultSet.getString("discountcode");
 	tempUserObject.setUsertype(usertype);
 	tempUserObject.setEmail(email);
 	tempUserObject.setLastname(lastname);
@@ -601,9 +707,9 @@ public class DBUtils {
 		alert.setContentText("Ticket not found in the database!");
 		alert.show();
 	    } else {
-		Ticket ticketObject=DBUtils.getTicketObject(ticketID);
+		Ticket ticketObject = DBUtils.getTicketObject(ticketID);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setContentText("Are you sure you want to cancel this ticket?\n"+ticketObject.toStringForCancel());
+		alert.setContentText("Are you sure you want to cancel this ticket?\n" + ticketObject.toStringForCancel());
 
 		// Get the dialog pane
 		DialogPane dialogPane = alert.getDialogPane();
@@ -628,7 +734,7 @@ public class DBUtils {
 		    alert = new Alert(Alert.AlertType.INFORMATION);
 		    alert.setTitle("Confirmed, Ticket is Cancelled!");
 		    alert.setHeaderText(null); // Optional: You can set a header text if needed
-		    alert.setContentText("Ticket is Cancelled!\n"+"Notification is sent to Email:\n"+ticketObject.getEmail());
+		    alert.setContentText("Ticket is Cancelled!\n" + "Notification is sent to Email:\n" + ticketObject.getEmail());
 		    alert.showAndWait();
 
 		    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -671,7 +777,7 @@ public class DBUtils {
 
     }
 
-    public static void displayTickets( ListView<String> listview_box, User user,Ticket outsideTicketObject) {
+    public static void displayTickets(ListView<String> listview_box, User user, Ticket outsideTicketObject) {
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
@@ -683,15 +789,15 @@ public class DBUtils {
 	    preparedStatement.setString(1, user.getEmail());
 	    resultSet = preparedStatement.executeQuery();
 
-		while (resultSet.next()) {
-		    String ticketID = resultSet.getString("ticketID");
-		    Ticket ticket=DBUtils.getTicketObject(ticketID);
-		    String listOut = ticket.getTicketID() + "    " +ticket.getFlightID() + "    " + ticket.getOriginOutput() + "    " + ticket.getDestinationOutput() + "    " + ticket.getFlightdate() + "    " + ticket.getDepart_time()+ "    " + ticket.getArrival_time();
-		    listview_box.getItems().add(listOut);//populate listview with values
-		}
+	    while (resultSet.next()) {
+		String ticketID = resultSet.getString("ticketID");
+		Ticket ticket = DBUtils.getTicketObject(ticketID);
+		String listOut = ticket.getTicketID() + "    " + ticket.getFlightID() + "    " + ticket.getOriginOutput() + "    " + ticket.getDestinationOutput() + "    " + ticket.getFlightdate() + "    " + ticket.getDepart_time() + "    " + ticket.getArrival_time();
+		listview_box.getItems().add(listOut);//populate listview with values
+	    }
 
-		//select item from the list
-	    if(listview_box!=null){
+	    //select item from the list
+	    if (listview_box != null) {
 		listview_box.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		    @Override
 		    public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -699,7 +805,7 @@ public class DBUtils {
 			if (t1 != null) {//this if{} is added to handle clear the listview_box after each time search is pressed.
 			    String var = listview_box.getSelectionModel().getSelectedItem().substring(0, 7).trim();
 			    try {
-				Ticket temp=DBUtils.getTicketObject(var);
+				Ticket temp = DBUtils.getTicketObject(var);
 				outsideTicketObject.setTicketID(temp.getTicketID());
 				outsideTicketObject.setCust_firstname(temp.getCust_firstname());
 				outsideTicketObject.setCust_lastname(temp.getCust_lastname());
@@ -718,7 +824,6 @@ public class DBUtils {
 		    }
 		});
 	    }
-
 
 
 	} catch (SQLException e) {
@@ -761,22 +866,22 @@ public class DBUtils {
 	    preparedStatement.setString(1, email.getText());
 	    resultSet = preparedStatement.executeQuery();
 
-	    if(resultSet.next()){
-		String discountcode=resultSet.getString("discountcode");
-		if(discountcode.equals(tf_discountcode.getText())){
-		    ticket.setPrice(ticket.getPrice()*0.8);
+	    if (resultSet.next()) {
+		String discountcode = resultSet.getString("discountcode");
+		if (discountcode.equals(tf_discountcode.getText())) {
+		    ticket.setPrice(ticket.getPrice() * 0.8);
 		    Booking.setDiscountApplied(true);
 
 		    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		    alert.setHeaderText("Discount Applied!"); // Optional
 		    alert.setContentText("Congratulations!\nYou get a 20% discount");
 		    alert.show();
-		}else {
+		} else {
 		    Alert alert = new Alert(Alert.AlertType.ERROR);
 		    alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
 		    alert.show();
 		}
-	    }else {
+	    } else {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText("Invalid Discount Code\n(Valid Code is Linked with Email)");
 		alert.show();
@@ -820,11 +925,11 @@ public class DBUtils {
 	    preparedStatement = connection.prepareStatement("SELECT flightID FROM flights WHERE flightID =? ");
 	    preparedStatement.setString(1, flightID);
 	    resultSet = preparedStatement.executeQuery();
-	    if(!resultSet.next()){
+	    if (!resultSet.next()) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText("Flight Not Found!");
 		alert.show();
-	    }else {
+	    } else {
 
 		preparedStatement = connection.prepareStatement("SELECT ticketID,cust_firstname,cust_lastname,seatID,email FROM tickets WHERE flightID =? ");
 		preparedStatement.setString(1, flightID);
@@ -837,35 +942,10 @@ public class DBUtils {
 		    String seatID = resultSet.getString("seatID");
 		    String email = resultSet.getString("email");
 
-//		Ticket ticket=DBUtils.getTicketObject(ticketID);
-//		String listOut = ticket.getTicketID() + "    " +ticket.getFlightID() + "    " + ticket.getOriginOutput() + "    " + ticket.getDestinationOutput() + "    " + ticket.getFlightdate() + "    " + ticket.getDepart_time()+ "    " + ticket.getArrival_time();
-		    String listOut = ticketID + "    " + seatID + "      " + cust_firstname + "  " + cust_lastname+ "      " + email;
+		    String listOut = ticketID + "    " + seatID + "      " + cust_firstname + "  " + cust_lastname + "      " + email;
 		    listview_box.getItems().add(listOut);//populate listview with values
 		}
-
-		//select item from the list
-//		if (listview_box != null) {
-//		    listview_box.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-//			@Override
-//			public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-//			    //everytime an item is selected, this function changed will be called.
-//			    if (t1 != null) {//this if{} is added to handle clear the listview_box after each time search is pressed.
-//				String var = listview_box.getSelectionModel().getSelectedItem().substring(0, 7).trim();
-//				try {
-//				    Ticket temp = DBUtils.getTicketObject(var);
-//				    outsideUserObject.setEmail(temp.getEmail());
-//
-//				} catch (SQLException e) {
-//				    throw new RuntimeException(e);
-//				}
-//
-//			    }
-//			}
-//		    });
-//		}
 	    }
-
-
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	} finally {
@@ -905,11 +985,11 @@ public class DBUtils {
 	    preparedStatement = connection.prepareStatement("SELECT email FROM users WHERE email =? ");
 	    preparedStatement.setString(1, email);
 	    resultSet = preparedStatement.executeQuery();
-	    if(!resultSet.next()){
+	    if (!resultSet.next()) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setContentText("User with that Email Not Found\nTry different Email");
 		alert.show();
-	    }else {
+	    } else {
 
 		preparedStatement = connection.prepareStatement("UPDATE users SET discountcode =?  WHERE email =?");
 		preparedStatement.setString(1, code);
@@ -922,8 +1002,62 @@ public class DBUtils {
 		alert.setContentText("Discount Code: " + code + "\nSent to Email: " + email);
 		alert.showAndWait();
 	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+
+	    if (resultSet != null) {
+		try {
+		    resultSet.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (connection != null) {
+		try {
+		    connection.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (preparedStatement != null) {
+		try {
+		    preparedStatement.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    public static void showSeats(Ticket ticket, RadioButton rbA1, RadioButton rbB1, RadioButton rbC1, RadioButton rbD1, RadioButton rbE1) {
 
 
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	DatabaseConnection connectionObject = new DatabaseConnection();
+
+	try {
+	    connection = connectionObject.getDBConnection();
+	    preparedStatement = connection.prepareStatement("SELECT seatID FROM tickets WHERE flightID =? ");
+	    preparedStatement.setString(1, ticket.getFlightID());
+	    resultSet = preparedStatement.executeQuery();
+
+	    while (resultSet.next()) {
+		String seatID = resultSet.getString("seatID");
+		if (seatID.equals("A1")) {
+		    rbA1.setVisible(false);
+		} else if (seatID.equals("B1")) {
+		    rbB1.setVisible(false);
+		} else if (seatID.equals("C1")) {
+		    rbC1.setVisible(false);
+		} else if (seatID.equals("D1")) {
+		    rbD1.setVisible(false);
+		} else if (seatID.equals("E1")) {
+		    rbE1.setVisible(false);
+		}
+	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	} finally {

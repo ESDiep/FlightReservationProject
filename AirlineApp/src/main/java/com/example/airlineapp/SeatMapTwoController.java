@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SeatMapController implements Initializable {
+public class SeatMapTwoController implements Initializable {
     @FXML
     private RadioButton rb_a1;
     @FXML
@@ -33,7 +33,7 @@ public class SeatMapController implements Initializable {
 
     private Ticket ticket;
 
-    public SeatMapController(Ticket ticket) {
+    public SeatMapTwoController(Ticket ticket) {
 	this.ticket = ticket;
     }
 
