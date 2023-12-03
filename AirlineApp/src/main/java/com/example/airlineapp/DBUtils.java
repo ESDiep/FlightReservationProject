@@ -203,7 +203,7 @@ public class DBUtils {
 
 	    paymentObject.setPaymentID(ticket.getPaymentID());
 	    paymentObject.setCardholdername(cardholdername);
-	    paymentObject.setCardnumber(Integer.parseInt(cardnumber));
+	    paymentObject.setCardnumber(cardnumber);
 	    paymentObject.setCardcode(Integer.parseInt(cardcode));
 
 	    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
@@ -230,7 +230,7 @@ public class DBUtils {
 	    psInsertPayment = connection.prepareStatement("INSERT INTO payments (paymentID,cardholdername,cardnumber,securitycode) VALUES(?,?,?,?)");
 	    psInsertPayment.setInt(1, ticket.getPaymentID());
 	    psInsertPayment.setString(2, cardholdername);
-	    psInsertPayment.setInt(3, Integer.parseInt(cardnumber));
+	    psInsertPayment.setString(3, cardnumber);
 	    psInsertPayment.setInt(4, Integer.parseInt(cardcode));
 	    psInsertPayment.executeUpdate();
 

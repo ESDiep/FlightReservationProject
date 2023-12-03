@@ -58,7 +58,7 @@ CREATE TABLE `AirlineApp`.`tickets` (
   CREATE TABLE `AirlineApp`.`payments` (
   `paymentID` INT NOT NULL,
   `cardholdername` VARCHAR(45) NOT NULL,
-  `cardnumber` INT NOT NULL,
+  `cardnumber` VARCHAR(45) NOT NULL,
   `securitycode` INT NOT NULL,
   PRIMARY KEY (`paymentID`));
   
